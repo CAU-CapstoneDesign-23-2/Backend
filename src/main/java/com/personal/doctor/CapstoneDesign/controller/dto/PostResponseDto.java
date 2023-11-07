@@ -1,0 +1,24 @@
+package com.personal.doctor.CapstoneDesign.controller.dto;
+
+import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
+import lombok.Getter;
+
+@Getter
+public class PostResponseDto {
+    private Long id;
+    private String category;
+    private String title;
+    private String question;
+    private String docName;
+    private String answer;
+
+    public PostResponseDto(Posts entity) {
+        this.id = entity.getId();
+        this.category = entity.getCategory();
+        this.title = entity.getTitle();
+        this.question = entity.getQuestion();
+        this.docName = entity.getDocName();
+        this.answer = entity.getAnswer();
+    }
+
+}
