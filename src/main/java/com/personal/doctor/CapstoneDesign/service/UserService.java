@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.service;
 
 import com.personal.doctor.CapstoneDesign.common.UserAlreadyExistException;
+import com.personal.doctor.CapstoneDesign.common.UserLoginFailureException;
 import com.personal.doctor.CapstoneDesign.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.controller.dto.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.domain.users.Users;
@@ -28,6 +29,19 @@ public class UserService {
                 .build();
         usersRepository.save(user);
         return user.getId();
+    }
+
+    @Transactional
+    public Long login(UserJoinRequestDto requestDto) {
+        Optional<Users> users = usersRepository.findByUserID(requestDto.getUserID());
+        if (users.isEmpty()) {
+            throw new UserLoginFailureException("로그인 실패");
+        } else {
+            if (!users.get().getUserPassword().equals(requestDto.getUserPassword())) {
+                throw new UserLoginFailureException("로그인 실패");
+            }
+        }
+        return users.get().getId();
     }
 
     public void findDuplicateUser(String userID) {
