@@ -13,8 +13,13 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/join")
-    public Long joinUser(@RequestBody UserJoinRequestDto requestDto) {
+    public Long join(@RequestBody UserJoinRequestDto requestDto) {
         return userService.join(requestDto);
+    }
+
+    @PostMapping("/login")
+    public Long login(@RequestBody UserJoinRequestDto requestDto) {
+        return userService.login(requestDto);
     }
 
     @PutMapping("/user/{id}")
