@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.domain.posts;
 
+import com.personal.doctor.CapstoneDesign.domain.users.Users;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,11 +30,16 @@ public class Posts {
     @Column
     private String answer;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users users;
+
     @Builder
-    public Posts(String category, String title, String question) {
+    public Posts(String category, String title, String question, Users users) {
         this.category = category;
         this.title = title;
         this.question = question;
+        this.users = users;
     }
 
     public void updatePosts(String title, String question) {
@@ -44,6 +50,10 @@ public class Posts {
     public void answered(String docName, String answer) {
         this.docName = docName;
         this.answer = answer;
+    }
+
+    public void setUser(Users users) {
+        this.users = users;
     }
 
 }

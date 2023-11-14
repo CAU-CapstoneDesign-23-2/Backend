@@ -1,9 +1,14 @@
 package com.personal.doctor.CapstoneDesign.domain.users;
 
+import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.h2.engine.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -30,6 +35,12 @@ public class Users {
     @Column
     private Integer userAge;
 
+    @OneToOne(mappedBy = "users")
+    private UserDetails userDetails;
+
+    @OneToMany(mappedBy = "users")
+    private List<Posts> posts = new ArrayList<>();
+
     @Builder
     public Users(String userID, String userPassword) {
         this.userID = userID;
@@ -44,5 +55,13 @@ public class Users {
     public void updateInfo(String userName, Integer userAge) {
         this.userName = userName;
         this.userAge = userAge;
+    }
+
+    public void updateUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
+    }
+
+    public void addPosts(Posts post) {
+        this.posts.add(post);
     }
 }

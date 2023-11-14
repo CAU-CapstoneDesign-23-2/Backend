@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.controller.dto;
 
 import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
+import com.personal.doctor.CapstoneDesign.domain.users.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ public class PostListResponseDto {
     private String question;
     private String docName;
     private String answer;
+    private Users user;
 
     public PostListResponseDto(Posts entity) {
         this.id = entity.getId();
@@ -21,5 +23,6 @@ public class PostListResponseDto {
         this.question = entity.getQuestion();
         this.docName = entity.getDocName();
         this.answer = entity.getAnswer();
+        this.user = entity.getUsers();
     }
 }
