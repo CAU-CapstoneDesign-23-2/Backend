@@ -13,27 +13,33 @@ public class PostController {
 
     private final PostService postService;
 
+    // 모든 게시물 반환
     @GetMapping("/posts")
     public List<PostListResponseDto> findAllPosts() {
         return postService.findAllDesc();
     }
 
-    @GetMapping("/posts/{id}")
-    public PostResponseDto findPost(@PathVariable Long id) {
+    // userId가 id인 사용자의 게시물 반환
+    @GetMapping("/posts/user/{id}")
+    public List<PostListResponseDto> userPosts(@PathVariable Long id) {
         return postService.findById(id);
     }
 
-    @PostMapping("/post")
-    public Long savePost(@RequestBody PostSaveRequestDto requestDto) {
-        return postService.save(requestDto);
+    // post 저장
+    @PostMapping("/post/{id}")
+    public Long savePost(@PathVariable Long id,
+                         @RequestBody PostSaveRequestDto requestDto) {
+        return postService.save(id, requestDto);
     }
 
+    // post 수정
     @PutMapping("/post/update/{id}")
     public Long updatePost(@PathVariable Long id,
                            @RequestBody PostUpdateRequestDto requestDto) {
         return postService.update(id, requestDto);
     }
 
+    // post 답변
     @PostMapping("/post/answer/{id}")
     public Long answerPost(@PathVariable Long id,
                            @RequestBody PostAnsweredResponseDto responseDto) {

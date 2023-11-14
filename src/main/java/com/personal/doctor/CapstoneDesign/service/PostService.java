@@ -1,10 +1,13 @@
 package com.personal.doctor.CapstoneDesign.service;
 
+import com.personal.doctor.CapstoneDesign.common.UserNotExistException;
 import com.personal.doctor.CapstoneDesign.controller.dto.*;
 import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
 import com.personal.doctor.CapstoneDesign.domain.posts.PostsRepository;
+import com.personal.doctor.CapstoneDesign.domain.users.Users;
+import com.personal.doctor.CapstoneDesign.domain.users.UsersRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,21 +15,31 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
 
+    private final UsersRepository usersRepository;
     private final PostsRepository postsRepository;
 
-    public PostService(PostsRepository postsRepository) {
+    public PostService(UsersRepository usersRepository, PostsRepository postsRepository) {
+        this.usersRepository = usersRepository;
         this.postsRepository = postsRepository;
     }
 
     @Transactional
-    public Long save(PostSaveRequestDto requestDto) {
-        return postsRepository.save(requestDto.toEntity()).getId();
+    public Long save(Long id, PostSaveRequestDto requestDto) {
+        Users user = usersRepository.findById(id)
+                .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
+        requestDto.setUsers(user);
+        Posts post = requestDto.toEntity();
+        user.addPosts(post);
+        post.setUser(user);
+        postsRepository.save(post);
+
+        return post.getId();
     }
 
     @Transactional
     public Long update(Long id, PostUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다. id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
         posts.updatePosts(requestDto.getTitle(), requestDto.getQuestion());
 
         return id;
@@ -35,17 +48,17 @@ public class PostService {
     @Transactional
     public Long answered(Long id, PostAnsweredResponseDto requestDto) {
         Posts posts = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다. id=" + id));
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
         posts.answered(requestDto.getDocName(), requestDto.getAnswer());
 
         return id;
     }
 
-    public PostResponseDto findById(Long id) {
-        Posts entity = postsRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다. id=" + id));
-
-        return new PostResponseDto(entity);
+    @org.springframework.transaction.annotation.Transactional
+    public List<PostListResponseDto> findById(Long id) {
+        return postsRepository.findAllUserPosts(id).stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
