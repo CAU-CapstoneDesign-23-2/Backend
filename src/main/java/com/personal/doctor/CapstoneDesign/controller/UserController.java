@@ -1,7 +1,7 @@
 package com.personal.doctor.CapstoneDesign.controller;
 
-import com.personal.doctor.CapstoneDesign.controller.dto.UserJoinRequestDto;
-import com.personal.doctor.CapstoneDesign.controller.dto.UserUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.users.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.users.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +28,13 @@ public class UserController {
         return userService.update(id, requestDto);
     }
 
+    @PutMapping("/user/role/{id}")
+    public Long updateUserRole(@PathVariable Long id) {
+        return userService.updateRole(id);
+    }
+
     // TODO: UserDetails 저장 기능
+    // TODO: id -> stdId 변경
+    // TODO: 주석 달기
 
 }
