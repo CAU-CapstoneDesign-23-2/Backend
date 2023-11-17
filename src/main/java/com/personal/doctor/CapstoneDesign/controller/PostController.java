@@ -1,6 +1,9 @@
 package com.personal.doctor.CapstoneDesign.controller;
 
-import com.personal.doctor.CapstoneDesign.controller.dto.*;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostAnsweredResponseDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostListResponseDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

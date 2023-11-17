@@ -1,9 +1,9 @@
 package com.personal.doctor.CapstoneDesign.service;
 
-import com.personal.doctor.CapstoneDesign.controller.dto.PostAnsweredResponseDto;
-import com.personal.doctor.CapstoneDesign.controller.dto.PostSaveRequestDto;
-import com.personal.doctor.CapstoneDesign.controller.dto.PostUpdateRequestDto;
-import com.personal.doctor.CapstoneDesign.controller.dto.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostAnsweredResponseDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.users.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
 import com.personal.doctor.CapstoneDesign.domain.posts.PostsRepository;
 import org.junit.jupiter.api.Assertions;

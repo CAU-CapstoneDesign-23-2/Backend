@@ -2,8 +2,6 @@ package com.personal.doctor.CapstoneDesign.domain.posts;
 
 import com.personal.doctor.CapstoneDesign.domain.users.Users;
 import com.personal.doctor.CapstoneDesign.domain.users.UsersRepository;
-import lombok.RequiredArgsConstructor;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
