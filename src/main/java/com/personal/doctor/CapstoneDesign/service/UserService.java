@@ -45,6 +45,16 @@ public class UserService {
         return users.get().getId();
     }
 
+    @Transactional
+    public Long delete(Long id) {
+        Users users = usersRepository.findById(id)
+                .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다"));
+        users.beforeDelete();
+        usersRepository.delete(users);
+
+        return users.getId();
+    }
+
     public void findDuplicateUser(String userID) {
         Optional<Users> user = usersRepository.findByUserID(userID);
         if(user.isPresent()) {
