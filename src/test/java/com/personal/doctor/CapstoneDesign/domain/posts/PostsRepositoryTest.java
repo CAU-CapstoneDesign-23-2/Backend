@@ -2,6 +2,7 @@ package com.personal.doctor.CapstoneDesign.domain.posts;
 
 import com.personal.doctor.CapstoneDesign.domain.users.Users;
 import com.personal.doctor.CapstoneDesign.domain.users.UsersRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +21,21 @@ class PostsRepositoryTest {
     @Autowired
     private PostsRepository postsRepository;
 
+    @AfterEach
+    public void deleteAll() {
+        postsRepository.deleteAll();
+        usersRepository.deleteAll();
+    }
+
     @Test
     public void 게시물_작성하기() {
-        Users users=Users.builder()
+        Users users = Users.builder()
                 .userID("user")
                 .userPassword("password")
                 .build();
         usersRepository.save(users);
 
-        Posts posts=Posts.builder()
+        Posts posts = Posts.builder()
                 .title("title")
                 .category("category")
                 .question("question")
