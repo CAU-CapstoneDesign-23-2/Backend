@@ -66,4 +66,10 @@ public class Users {
     public void addPosts(Posts post) {
         this.posts.add(post);
     }
+
+    public void beforeDelete() {
+        for (Posts post : posts) {
+            post.setUser(null);
+        }
+    }
 }
