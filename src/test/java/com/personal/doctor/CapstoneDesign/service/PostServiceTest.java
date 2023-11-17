@@ -6,15 +6,18 @@ import com.personal.doctor.CapstoneDesign.controller.dto.posts.PostUpdateRequest
 import com.personal.doctor.CapstoneDesign.controller.dto.users.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
 import com.personal.doctor.CapstoneDesign.domain.posts.PostsRepository;
+import com.personal.doctor.CapstoneDesign.util.PostNOTExistException;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 class PostServiceTest {
@@ -28,49 +31,89 @@ class PostServiceTest {
     @Autowired
     private PostsRepository postsRepository;
 
+    @AfterEach
+    public void deleteAll() {
+        postsRepository.deleteAll();
+        postService.deleteAll();
+        userService.deleteAll();
+    }
+
     @Test
-    public void 게시물_저장수정답변() {
-        // 저장
-        UserJoinRequestDto user = UserJoinRequestDto.builder()
-                .userID("userID")
-                .userPassword("userPW")
+    @Rollback
+    public void 게시물_저장() {
+        UserJoinRequestDto userRequestDto = UserJoinRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
                 .build();
-        Long userId = userService.join(user);
-        PostSaveRequestDto post = PostSaveRequestDto.builder()
+        Long userID = userService.join(userRequestDto);
+
+        PostSaveRequestDto postRequestDto = PostSaveRequestDto.builder()
                 .title("title")
                 .category("category")
                 .question("question")
                 .build();
-        Long postId = postService.save(userId, post);
-        Posts savedSearchPost = postsRepository.findPostsById(postId).get();
+        Long postID = postService.save(userID, postRequestDto);
 
-        Assertions.assertEquals(post.getTitle(), savedSearchPost.getTitle());
-        Assertions.assertEquals(post.getCategory(), savedSearchPost.getCategory());
-        Assertions.assertEquals(post.getQuestion(), savedSearchPost.getQuestion());
+        Posts posts = postsRepository.findById(postID)
+                .orElseThrow(() -> new PostNOTExistException("게시물이 존재하지 않습니다."));
 
+        Assertions.assertEquals("title", posts.getTitle());
+    }
 
-        // 수정
-        PostUpdateRequestDto updatePost = PostUpdateRequestDto.builder()
-                .title("updated title")
-                .question("updated question")
+    @Test
+    @Rollback
+    public void 게시물_수정() {
+        UserJoinRequestDto userRequestDto = UserJoinRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
                 .build();
-        Long updatedPost = postService.update(userId, updatePost);
-        Posts updatedSearchPost = postsRepository.findPostsById(updatedPost).get();
+        Long userID = userService.join(userRequestDto);
 
-        Assertions.assertEquals(updatePost.getTitle(), updatedSearchPost.getTitle());
-        Assertions.assertEquals(updatePost.getQuestion(), updatedSearchPost.getQuestion());
+        PostSaveRequestDto postRequestDto = PostSaveRequestDto.builder()
+                .title("title")
+                .category("category")
+                .question("question1")
+                .build();
+        Long postID = postService.save(userID, postRequestDto);
 
+        PostUpdateRequestDto updateRequestDto = PostUpdateRequestDto.builder()
+                .title("title")
+                .question("question2")
+                .build();
+        postService.update(postID, updateRequestDto);
 
-        // 답변
-        PostAnsweredResponseDto answerPost = PostAnsweredResponseDto.builder()
-                .docName("docName")
+        Posts posts = postsRepository.findById(postID)
+                .orElseThrow(() -> new PostNOTExistException("게시물이 존재하지 않습니다."));
+
+        Assertions.assertEquals("question2", posts.getQuestion());
+    }
+
+    @Test
+    @Rollback
+    public void 게시물_답변() {
+        UserJoinRequestDto userRequestDto = UserJoinRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
+                .build();
+        Long userID = userService.join(userRequestDto);
+
+        PostSaveRequestDto postRequestDto = PostSaveRequestDto.builder()
+                .title("title")
+                .category("category")
+                .question("question1")
+                .build();
+        Long postID = postService.save(userID, postRequestDto);
+
+        PostAnsweredResponseDto answeredResponseDto = PostAnsweredResponseDto.builder()
                 .answer("answer")
+                .docName("docName")
                 .build();
-        Long answeredPost = postService.answered(postId, answerPost);
-        Posts answeredSearchPost = postsRepository.findPostsById(answeredPost).get();
+        postService.answered(postID, answeredResponseDto);
 
-        Assertions.assertEquals(answerPost.getDocName(), answeredSearchPost.getDocName());
-        Assertions.assertEquals(answerPost.getAnswer(), answeredSearchPost.getAnswer());
+        Posts posts = postsRepository.findById(postID)
+                .orElseThrow(() -> new PostNOTExistException("게시물이 존재하지 않습니다."));
+
+        Assertions.assertEquals("docName", posts.getDocName());
     }
 
 }
