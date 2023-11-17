@@ -30,7 +30,7 @@ public class Posts {
     @Column
     private String answer;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, optional = false)
     @JoinColumn(name = "user_id")
     private Users users;
 
