@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.controller.dto;
+package com.personal.doctor.CapstoneDesign.controller.dto.posts;
 
 import lombok.Builder;
 import lombok.Getter;

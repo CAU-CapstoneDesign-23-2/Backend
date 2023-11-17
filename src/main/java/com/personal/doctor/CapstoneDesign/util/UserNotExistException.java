@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.common;
+package com.personal.doctor.CapstoneDesign.util;
 
 public class UserNotExistException extends RuntimeException {
 

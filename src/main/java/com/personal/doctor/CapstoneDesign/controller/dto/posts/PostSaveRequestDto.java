@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.controller.dto;
+package com.personal.doctor.CapstoneDesign.controller.dto.posts;
 
 import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
 import com.personal.doctor.CapstoneDesign.domain.users.Users;

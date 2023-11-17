@@ -1,13 +1,13 @@
-package com.personal.doctor.CapstoneDesign.controller.dto;
+package com.personal.doctor.CapstoneDesign.controller.dto.posts;
 
 import com.personal.doctor.CapstoneDesign.domain.posts.Posts;
 import com.personal.doctor.CapstoneDesign.domain.users.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Getter
-public class PostListResponseDto {
+@NoArgsConstructor
+public class PostResponseDto {
     private Long id;
     private String category;
     private String title;
@@ -16,7 +16,7 @@ public class PostListResponseDto {
     private String answer;
     private Users user;
 
-    public PostListResponseDto(Posts entity) {
+    public PostResponseDto(Posts entity) {
         this.id = entity.getId();
         this.category = entity.getCategory();
         this.title = entity.getTitle();
@@ -25,4 +25,5 @@ public class PostListResponseDto {
         this.answer = entity.getAnswer();
         this.user = entity.getUsers();
     }
+
 }
