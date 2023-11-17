@@ -81,4 +81,9 @@ public class UserService {
     // TODO 1: 사용자의 간단한 정보 저장하는 기능 추가
     // TODO 2: 사용자의 세부 정보 저장하는 기능 추가
 
+    @Transactional
+    public void deleteAll() {
+        usersRepository.deleteAll();
+    }
+
 }

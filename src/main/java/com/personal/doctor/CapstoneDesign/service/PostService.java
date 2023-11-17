@@ -70,4 +70,9 @@ public class PostService {
                 .map(PostListResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void deleteAll() {
+        postsRepository.deleteAll();
+    }
 }
