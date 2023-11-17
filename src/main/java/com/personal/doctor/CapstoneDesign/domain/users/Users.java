@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.h2.engine.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class Users {
     @OneToOne(mappedBy = "users")
     private UserDetails userDetails;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
 
     @Builder
@@ -48,8 +47,9 @@ public class Users {
         this.role = Role.USER;
     }
 
-    public void updateRole() {
+    public Long updateRole() {
         this.role = Role.DOCTOR;
+        return this.id;
     }
 
     public void updateInfo(String userName, Integer userAge) {
