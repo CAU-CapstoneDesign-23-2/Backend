@@ -1,9 +1,10 @@
 package com.personal.doctor.CapstoneDesign.service;
 
-import com.personal.doctor.CapstoneDesign.common.UserAlreadyExistException;
-import com.personal.doctor.CapstoneDesign.common.UserLoginFailureException;
-import com.personal.doctor.CapstoneDesign.controller.dto.UserJoinRequestDto;
-import com.personal.doctor.CapstoneDesign.controller.dto.UserUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.util.UserAlreadyExistException;
+import com.personal.doctor.CapstoneDesign.util.UserLoginFailureException;
+import com.personal.doctor.CapstoneDesign.util.UserNotExistException;
+import com.personal.doctor.CapstoneDesign.controller.dto.users.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.controller.dto.users.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.domain.users.Users;
 import com.personal.doctor.CapstoneDesign.domain.users.UsersRepository;
 import jakarta.transaction.Transactional;
@@ -58,6 +59,13 @@ public class UserService {
         user.updateInfo(requestDto.getUserName(), requestDto.getUserAge());
 
         return id;
+    }
+
+    @Transactional
+    public Long updateRole(Long id) {
+        Users users = usersRepository.findById(id)
+                .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
+        return users.updateRole();
     }
 
     // TODO 1: 사용자의 간단한 정보 저장하는 기능 추가
