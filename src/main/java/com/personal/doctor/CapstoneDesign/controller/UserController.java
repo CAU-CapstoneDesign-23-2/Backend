@@ -24,6 +24,12 @@ public class UserController {
         return userService.login(requestDto);
     }
 
+    // 사용자 탈퇴
+    @DeleteMapping("/delete/{id}")
+    public Long delete(@PathVariable Long id) {
+        return userService.delete(id);
+    }
+
     // 사용자 정보 수정
     @PutMapping("/user/{stuId}")
     public Long updateUserInfo(@PathVariable Long stuId,
