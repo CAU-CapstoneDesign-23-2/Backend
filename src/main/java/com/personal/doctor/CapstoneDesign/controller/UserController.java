@@ -25,16 +25,16 @@ public class UserController {
     }
 
     // 사용자 정보 수정
-    @PutMapping("/user/{id}")
-    public Long updateUserInfo(@PathVariable Long id,
+    @PutMapping("/user/{stuId}")
+    public Long updateUserInfo(@PathVariable Long stuId,
                                @RequestBody UserUpdateRequestDto requestDto) {
-        return userService.update(id, requestDto);
+        return userService.update(stuId, requestDto);
     }
 
     // 사용자 역할 수정
-    @PutMapping("/user/role/{id}")
-    public Long updateUserRole(@PathVariable Long id) {
-        return userService.updateRole(id);
+    @PutMapping("/user/role/{stuId}")
+    public Long updateUserRole(@PathVariable Long stuId) {
+        return userService.updateRole(stuId);
     }
 
     // TODO: UserDetails 저장 기능
