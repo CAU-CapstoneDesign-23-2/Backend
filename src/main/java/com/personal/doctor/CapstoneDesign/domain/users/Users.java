@@ -34,16 +34,18 @@ public class Users {
     @Column
     private Integer userAge;
 
-    @OneToOne(mappedBy = "users")
-    private UserDetails userDetails;
-
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
 
+    @OneToOne(mappedBy = "users", fetch = FetchType.LAZY)
+    private UserDetails userDetails;
+
     @Builder
-    public Users(String userID, String userPassword) {
+    public Users(String userID, String userPassword, String userName, Integer userAge) {
         this.userID = userID;
         this.userPassword = userPassword;
+        this.userName = userName;
+        this.userAge = userAge;
         this.role = Role.USER;
     }
 
