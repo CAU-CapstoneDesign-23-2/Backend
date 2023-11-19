@@ -32,7 +32,7 @@ public class UserController {
 
     // 사용자 정보 수정
     @PutMapping("/user/{stuId}")
-    public Long updateUserInfo(@PathVariable Long stuId,
+    public Long updateUserName(@PathVariable Long stuId,
                                @RequestBody UserUpdateRequestDto requestDto) {
         return userService.update(stuId, requestDto);
     }
@@ -43,6 +43,6 @@ public class UserController {
         return userService.updateRole(stuId);
     }
 
-    // TODO: UserDetails 저장 기능
+    // TODO: Details 저장 기능
 
 }

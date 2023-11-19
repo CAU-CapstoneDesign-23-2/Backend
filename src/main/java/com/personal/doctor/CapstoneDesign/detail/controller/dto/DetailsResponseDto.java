@@ -1,11 +1,11 @@
-package com.personal.doctor.CapstoneDesign.userDetail.controller.dto;
+package com.personal.doctor.CapstoneDesign.detail.controller.dto;
 
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
-import com.personal.doctor.CapstoneDesign.userDetail.domain.UserDetails;
+import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import lombok.Getter;
 
 @Getter
-public class UserDetailsResponseDto {
+public class DetailsResponseDto {
 
     private Long id;
     private String age;
@@ -19,7 +19,7 @@ public class UserDetailsResponseDto {
     private String activity3;
     private Users users;
 
-    public UserDetailsResponseDto(UserDetails entity) {
+    public DetailsResponseDto(Details entity) {
         this.id = entity.getId();
         this.age = entity.getAge();
         this.gender = entity.getGender();

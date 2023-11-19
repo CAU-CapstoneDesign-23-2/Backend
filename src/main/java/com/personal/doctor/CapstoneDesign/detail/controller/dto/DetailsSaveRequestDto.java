@@ -1,13 +1,13 @@
-package com.personal.doctor.CapstoneDesign.userDetail.controller.dto;
+package com.personal.doctor.CapstoneDesign.detail.controller.dto;
 
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
-import com.personal.doctor.CapstoneDesign.userDetail.domain.UserDetails;
+import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Getter
-public class UserDetailsSaveRequestDto {
+public class DetailsSaveRequestDto {
 
     private String age;
     private String gender;
@@ -20,8 +20,8 @@ public class UserDetailsSaveRequestDto {
     private String activity3;
     private Users users;
 
-    public UserDetailsSaveRequestDto(String age, String gender, String disease1, String disease2, String disease3,
-                                     String surgery, String activity1, String activity2, String activity3) {
+    public DetailsSaveRequestDto(String age, String gender, String disease1, String disease2, String disease3,
+                                 String surgery, String activity1, String activity2, String activity3) {
         this.age = age;
         this.gender = gender;
         this.disease1 = disease1;
@@ -33,8 +33,8 @@ public class UserDetailsSaveRequestDto {
         this.activity3 = activity3;
     }
 
-    public UserDetails toEntity() {
-        return UserDetails.builder()
+    public Details toEntity() {
+        return Details.builder()
                 .age(age)
                 .gender(gender)
                 .disease1(disease1)

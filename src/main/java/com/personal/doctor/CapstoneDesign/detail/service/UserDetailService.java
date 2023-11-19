@@ -1,10 +1,10 @@
-package com.personal.doctor.CapstoneDesign.userDetail.service;
+package com.personal.doctor.CapstoneDesign.detail.service;
 
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
-import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.UserDetailsSaveRequestDto;
-import com.personal.doctor.CapstoneDesign.userDetail.domain.UserDetails;
-import com.personal.doctor.CapstoneDesign.userDetail.domain.UserDetailsRepository;
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.detail.domain.Details;
+import com.personal.doctor.CapstoneDesign.detail.domain.UserDetailsRepository;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,15 +18,15 @@ public class UserDetailService {
     private final UserDetailsRepository userDetailsRepository;
 
     @Transactional
-    public Long save(Long userId, UserDetailsSaveRequestDto requestDto) {
+    public Long save(Long userId, DetailsSaveRequestDto requestDto) {
         Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
         requestDto.setUsers(users);
 
-        UserDetails userDetails = requestDto.toEntity();
-        userDetailsRepository.save(userDetails);
+        Details details = requestDto.toEntity();
+        userDetailsRepository.save(details);
 
-        return userDetails.getId();
+        return details.getId();
     }
 
 }

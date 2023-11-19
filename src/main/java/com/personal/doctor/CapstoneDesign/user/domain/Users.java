@@ -1,7 +1,7 @@
 package com.personal.doctor.CapstoneDesign.user.domain;
 
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
-import com.personal.doctor.CapstoneDesign.userDetail.domain.UserDetails;
+import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,7 +36,7 @@ public class Users {
     private List<Posts> posts = new ArrayList<>();
 
     @OneToOne(mappedBy = "users", fetch = FetchType.LAZY)
-    private UserDetails userDetails;
+    private Details details;
 
     @Builder
     public Users(String userID, String userPassword, String userName) {
@@ -55,8 +55,8 @@ public class Users {
         this.userName = userName;
     }
 
-    public void updateUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+    public void updateDetails(Details details) {
+        this.details = details;
     }
 
     public void addPosts(Posts post) {

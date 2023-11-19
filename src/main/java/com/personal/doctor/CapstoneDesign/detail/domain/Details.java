@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.userDetail.domain;
+package com.personal.doctor.CapstoneDesign.detail.domain;
 
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import jakarta.persistence.*;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class UserDetails {
+public class Details {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,8 +50,8 @@ public class UserDetails {
     private Users users;
 
     @Builder
-    public UserDetails(String age, String gender, String disease1, String disease2, String disease3,
-                       String surgery, String activity1, String activity2, String activity3, Users users) {
+    public Details(String age, String gender, String disease1, String disease2, String disease3,
+                   String surgery, String activity1, String activity2, String activity3, Users users) {
         this.age = age;
         this.gender = gender;
         this.disease1 = disease1;
