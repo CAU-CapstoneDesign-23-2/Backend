@@ -30,7 +30,6 @@ class UsersRepositoryTest {
                 .userID("ID1")
                 .userPassword("PW1")
                 .userName("Name1")
-                .userAge(23)
                 .build();
         usersRepository.save(user1);
 
@@ -50,7 +49,6 @@ class UsersRepositoryTest {
                 .userID("ID")
                 .userPassword("PW")
                 .userName("Name")
-                .userAge(78)
                 .build();
         usersRepository.save(user);
 
@@ -67,13 +65,12 @@ class UsersRepositoryTest {
                 .userID("ID")
                 .userPassword("PW")
                 .userName("Name")
-                .userAge(39)
                 .build();
         usersRepository.save(user);
 
         Users found = usersRepository.findByUserID("ID")
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
 
-        assertEquals(39, found.getUserAge());
+        assertEquals("Name", found.getUserName());
     }
 }
