@@ -47,5 +47,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/calendar-nlp-server:latest
-
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-health-companion:latest
