@@ -66,7 +66,7 @@ public class UserService {
     public Long update(Long id, UserUpdateRequestDto requestDto) {
         Users user = usersRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다. id=" + id));
-        user.updateInfo(requestDto.getUserName(), requestDto.getUserAge());
+        user.updateUserName(requestDto.getUserName());
 
         return id;
     }

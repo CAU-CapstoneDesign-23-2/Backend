@@ -32,9 +32,6 @@ public class Users {
     @Column
     private String userName;
 
-    @Column
-    private Integer userAge;
-
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
 
@@ -42,11 +39,10 @@ public class Users {
     private UserDetails userDetails;
 
     @Builder
-    public Users(String userID, String userPassword, String userName, Integer userAge) {
+    public Users(String userID, String userPassword, String userName) {
         this.userID = userID;
         this.userPassword = userPassword;
         this.userName = userName;
-        this.userAge = userAge;
         this.role = Role.USER;
     }
 
@@ -55,9 +51,8 @@ public class Users {
         return this.id;
     }
 
-    public void updateInfo(String userName, Integer userAge) {
+    public void updateUserName(String userName) {
         this.userName = userName;
-        this.userAge = userAge;
     }
 
     public void updateUserDetails(UserDetails userDetails) {
