@@ -4,7 +4,7 @@ import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
-import com.personal.doctor.CapstoneDesign.detail.domain.UserDetailsRepository;
+import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class UserDetailService {
+public class DetailService {
 
     private final UsersRepository usersRepository;
-    private final UserDetailsRepository userDetailsRepository;
+    private final DetailsRepository detailsRepository;
 
     @Transactional
     public Long save(Long userId, DetailsSaveRequestDto requestDto) {
@@ -24,7 +24,7 @@ public class UserDetailService {
         requestDto.setUsers(users);
 
         Details details = requestDto.toEntity();
-        userDetailsRepository.save(details);
+        detailsRepository.save(details);
 
         return details.getId();
     }
