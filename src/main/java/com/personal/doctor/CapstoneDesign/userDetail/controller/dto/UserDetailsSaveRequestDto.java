@@ -33,18 +33,18 @@ public class UserDetailsSaveRequestDto {
         this.activity3 = activity3;
     }
 
-    public UserDetails toEntity(UserDetails entity) {
+    public UserDetails toEntity() {
         return UserDetails.builder()
-                .age(entity.getAge())
-                .gender(entity.getGender())
-                .disease1(entity.getDisease1())
-                .disease2(entity.getDisease2())
-                .disease3(entity.getDisease3())
-                .surgery(entity.getSurgery())
-                .activity1(entity.getActivity1())
-                .activity2(entity.getActivity2())
-                .activity3(entity.getActivity3())
-                .users(entity.getUsers())
+                .age(age)
+                .gender(gender)
+                .disease1(disease1)
+                .disease2(disease2)
+                .disease3(disease3)
+                .surgery(surgery)
+                .activity1(activity1)
+                .activity2(activity2)
+                .activity3(activity3)
+                .users(users)
                 .build();
     }
 
