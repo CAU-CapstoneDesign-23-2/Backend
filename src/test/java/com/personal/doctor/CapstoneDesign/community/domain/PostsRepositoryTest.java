@@ -23,7 +23,7 @@ class PostsRepositoryTest {
     private PostsRepository postsRepository;
 
     @AfterEach
-    public void deleteAll() {
+    public void clean() {
         postsRepository.deleteAll();
         usersRepository.deleteAll();
     }

@@ -19,7 +19,7 @@ class UsersRepositoryTest {
     private UsersRepository usersRepository;
 
     @AfterEach
-    public void deleteAll() {
+    public void clean() {
         usersRepository.deleteAll();
     }
 

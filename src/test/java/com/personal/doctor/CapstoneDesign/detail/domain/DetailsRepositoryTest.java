@@ -6,6 +6,7 @@ import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,15 +31,18 @@ class DetailsRepositoryTest {
 
     @BeforeEach
     public void setup() {
-        detailsRepository.deleteAll();
-        usersRepository.deleteAll();
-        userService.deleteAll();
-
         UserJoinRequestDto users = UserJoinRequestDto.builder()
                 .userID("ID")
                 .userPassword("PW")
                 .build();
         userID = userService.join(users);
+    }
+
+    @AfterEach
+    public void clean() {
+        detailsRepository.deleteAll();
+        usersRepository.deleteAll();
+        userService.deleteAll();
     }
 
     @Test

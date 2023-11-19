@@ -32,7 +32,7 @@ class PostServiceTest {
     private PostsRepository postsRepository;
 
     @AfterEach
-    public void deleteAll() {
+    public void clean() {
         postsRepository.deleteAll();
         postService.deleteAll();
         userService.deleteAll();
