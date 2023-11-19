@@ -6,7 +6,7 @@ import com.personal.doctor.CapstoneDesign.community.controller.dto.PostUpdateReq
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
-import com.personal.doctor.CapstoneDesign.community.util.PostNOTExistException;
+import com.personal.doctor.CapstoneDesign.util.exceptions.PostNOTExistException;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;

@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.user.util;
+package com.personal.doctor.CapstoneDesign.util.exceptions;
 
 public class UserAlreadyExistException extends RuntimeException {
 

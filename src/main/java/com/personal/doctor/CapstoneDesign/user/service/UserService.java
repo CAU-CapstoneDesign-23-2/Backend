@@ -1,8 +1,8 @@
 package com.personal.doctor.CapstoneDesign.user.service;
 
-import com.personal.doctor.CapstoneDesign.user.util.UserAlreadyExistException;
-import com.personal.doctor.CapstoneDesign.user.util.UserLoginFailureException;
-import com.personal.doctor.CapstoneDesign.user.util.UserNotExistException;
+import com.personal.doctor.CapstoneDesign.util.exceptions.UserAlreadyExistException;
+import com.personal.doctor.CapstoneDesign.util.exceptions.UserLoginFailureException;
+import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;

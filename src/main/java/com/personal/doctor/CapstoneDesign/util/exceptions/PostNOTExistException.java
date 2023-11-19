@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.community.util;
+package com.personal.doctor.CapstoneDesign.util.exceptions;
 
 public class PostNOTExistException extends RuntimeException {
 

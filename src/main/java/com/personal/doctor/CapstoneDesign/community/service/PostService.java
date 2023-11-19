@@ -1,6 +1,6 @@
 package com.personal.doctor.CapstoneDesign.community.service;
 
-import com.personal.doctor.CapstoneDesign.user.util.UserNotExistException;
+import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostAnsweredResponseDto;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostListResponseDto;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostSaveRequestDto;
