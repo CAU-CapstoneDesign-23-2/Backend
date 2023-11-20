@@ -24,12 +24,12 @@ class UserServiceTest {
     }
 
     @Test
-    public void saveUser() {
-        UserJoinRequestDto user = UserJoinRequestDto.builder()
+    public void 사용자_저장() {
+        UserJoinRequestDto requestDto = UserJoinRequestDto.builder()
                 .userID("ID")
                 .userPassword("PW")
                 .build();
-        Long userId = userService.join(user);
+        Long userId = userService.join(requestDto);
 
         assertEquals(1, userId);
     }

@@ -48,7 +48,7 @@ class DetailsRepositoryTest {
     }
 
     @Test
-    public void 사용자_세부정보_저장() {
+    public void 세부정보_저장() {
 
         Users user = usersRepository.findById(userID)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));

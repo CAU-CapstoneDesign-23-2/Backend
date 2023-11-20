@@ -32,7 +32,7 @@ class PostsRepositoryTest {
 
     @Test
     @Rollback
-    public void 게시물_작성하기() {
+    public void 게시물_저장() {
         Users users = Users.builder()
                 .userID("user")
                 .userPassword("password")
