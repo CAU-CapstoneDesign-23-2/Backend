@@ -19,4 +19,11 @@ public class DetailController {
         return detailsService.save(userId, requestDto);
     }
 
+    // 세부정보 수정
+    @PutMapping("/detail/{userId}")
+    public Long update(@PathVariable Long userId,
+                       @RequestBody DetailsUpdateRequestDto requestDto) {
+        return detailsService.update(userId, requestDto);
+    }
+
 }
