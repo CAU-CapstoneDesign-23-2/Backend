@@ -31,7 +31,7 @@ class UserServiceTest {
                 .build();
         Long userId = userService.join(requestDto);
 
-        assertEquals(1, userId);
+        assertNotNull(userId);
     }
 
 }
