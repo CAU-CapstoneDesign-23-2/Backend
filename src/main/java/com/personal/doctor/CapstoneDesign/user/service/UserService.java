@@ -21,6 +21,7 @@ public class UserService {
         this.usersRepository = usersRepository;
     }
 
+    // 사용자 회원가입
     @Transactional
     public Long join(UserJoinRequestDto requestDto) {
         findDuplicateUser(requestDto.getUserID());
@@ -32,6 +33,7 @@ public class UserService {
         return user.getId();
     }
 
+    // 사용자 로그인
     @Transactional
     public Long login(UserJoinRequestDto requestDto) {
         Optional<Users> users = usersRepository.findByUserID(requestDto.getUserID());
@@ -45,6 +47,7 @@ public class UserService {
         return users.get().getId();
     }
 
+    // 사용자 탈퇴
     @Transactional
     public Long delete(Long id) {
         Users users = usersRepository.findById(id)
@@ -55,6 +58,7 @@ public class UserService {
         return users.getId();
     }
 
+    // 중복 ID 검사
     public void findDuplicateUser(String userID) {
         Optional<Users> user = usersRepository.findByUserID(userID);
         if(user.isPresent()) {
@@ -62,6 +66,7 @@ public class UserService {
         }
     }
 
+    // 사용자 이름 수정
     @Transactional
     public Long update(Long id, UserUpdateRequestDto requestDto) {
         Users user = usersRepository.findById(id)
@@ -71,15 +76,13 @@ public class UserService {
         return id;
     }
 
+    // 사용자 역할 변경 USER --> DOCTOR
     @Transactional
     public Long updateRole(Long id) {
         Users users = usersRepository.findById(id)
                 .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
         return users.updateRole();
     }
-
-    // TODO 1: 사용자의 간단한 정보 저장하는 기능 추가
-    // TODO 2: 사용자의 세부 정보 저장하는 기능 추가
 
     @Transactional
     public void deleteAll() {
