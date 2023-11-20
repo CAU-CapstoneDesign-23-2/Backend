@@ -39,13 +39,17 @@ public class Details {
 
     // 최근에 하고 있는 격렬한 활동 최대 3개 선택하여 저장
     @Column
-    private String activity1;
+    private String hobby1;
 
     @Column
-    private String activity2;
+    private String hobby2;
 
     @Column
-    private String activity3;
+    private String hobby3;
+
+    // 복용중인 약
+    @Column
+    private String medicine;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "user_id")
@@ -53,16 +57,17 @@ public class Details {
 
     @Builder
     public Details(String age, String gender, String disease1, String disease2, String disease3,
-                   String surgery, String activity1, String activity2, String activity3, Users users) {
+                   String surgery, String hobby1, String hobby2, String hobby3, String medicine, Users users) {
         this.age = age;
         this.gender = gender;
         this.disease1 = disease1;
         this.disease2 = disease2;
         this.disease3 = disease3;
         this.surgery = surgery;
-        this.activity1 = activity1;
-        this.activity2 = activity2;
-        this.activity3 = activity3;
+        this.hobby1 = hobby1;
+        this.hobby2 = hobby2;
+        this.hobby3 = hobby3;
+        this.medicine = medicine;
         this.users = users;
     }
 

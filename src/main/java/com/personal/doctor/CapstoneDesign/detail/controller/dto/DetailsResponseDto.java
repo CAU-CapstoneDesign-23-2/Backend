@@ -14,9 +14,10 @@ public class DetailsResponseDto {
     private String disease2;
     private String disease3;
     private String surgery;
-    private String activity1;
-    private String activity2;
-    private String activity3;
+    private String hobby1;
+    private String hobby2;
+    private String hobby3;
+    private String medicine;
     private Users users;
 
     public DetailsResponseDto(Details entity) {
@@ -27,9 +28,10 @@ public class DetailsResponseDto {
         this.disease2 = entity.getDisease2();
         this.disease3 = entity.getDisease3();
         this.surgery = entity.getSurgery();
-        this.activity1 = entity.getActivity1();
-        this.activity2 = entity.getActivity2();
-        this.activity3 = entity.getActivity3();
+        this.hobby1 = entity.getHobby1();
+        this.hobby2 = entity.getHobby2();
+        this.hobby3 = entity.getHobby3();
+        this.medicine = entity.getMedicine();
         this.users = entity.getUsers();
     }
 

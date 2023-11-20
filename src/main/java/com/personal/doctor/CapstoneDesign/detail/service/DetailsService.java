@@ -42,9 +42,10 @@ public class DetailsService {
         details.setDisease2(requestDto.getDisease2());
         details.setDisease3(requestDto.getDisease3());
         details.setSurgery(requestDto.getSurgery());
-        details.setActivity1(requestDto.getActivity1());
-        details.setActivity2(requestDto.getActivity2());
-        details.setActivity3(requestDto.getActivity3());
+        details.setHobby1(requestDto.getHobby1());
+        details.setHobby2(requestDto.getHobby2());
+        details.setHobby3(requestDto.getHobby3());
+        details.setMedicine(requestDto.getMedicine());
 
         return details.getId();
     }
