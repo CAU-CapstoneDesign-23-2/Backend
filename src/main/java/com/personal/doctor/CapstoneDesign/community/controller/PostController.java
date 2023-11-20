@@ -42,6 +42,12 @@ public class PostController {
         return postService.update(id, requestDto);
     }
 
+    // post 검색
+    @PostMapping("/post/search")
+    public List<PostListResponseDto> searchPost(@RequestBody String keyword) {
+        return postService.search(keyword);
+    }
+
     // post 답변
     @PostMapping("/post/answer/{id}")
     public Long answerPost(@PathVariable Long id,

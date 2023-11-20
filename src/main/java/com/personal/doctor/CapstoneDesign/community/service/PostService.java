@@ -9,8 +9,8 @@ import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,14 +57,21 @@ public class PostService {
         return id;
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
+    public List<PostListResponseDto> search(String keyword) {
+        return postsRepository.findPostsByKeyword(keyword).stream()
+                .map(PostListResponseDto::new)
+                .toList();
+    }
+
+    @Transactional
     public List<PostListResponseDto> findById(Long id) {
         return postsRepository.findAllUserPosts(id).stream()
                 .map(PostListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc().stream()
                 .map(PostListResponseDto::new)
