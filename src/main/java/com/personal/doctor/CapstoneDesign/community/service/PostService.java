@@ -26,6 +26,7 @@ public class PostService {
         this.postsRepository = postsRepository;
     }
 
+    // Post 저장
     @Transactional
     public Long save(Long id, PostSaveRequestDto requestDto) {
         Users user = usersRepository.findById(id)
@@ -39,6 +40,7 @@ public class PostService {
         return post.getId();
     }
 
+    // Post 수정
     @Transactional
     public Long update(Long id, PostUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
@@ -48,6 +50,7 @@ public class PostService {
         return id;
     }
 
+    // Post 답변
     @Transactional
     public Long answered(Long id, PostAnsweredResponseDto requestDto) {
         Posts posts = postsRepository.findById(id)
@@ -57,13 +60,15 @@ public class PostService {
         return id;
     }
 
+    // Post 검색
     @Transactional
     public List<PostListResponseDto> search(String keyword) {
         return postsRepository.findPostsByKeyword(keyword).stream()
                 .map(PostListResponseDto::new)
-                .toList();
+                .collect(Collectors.toList());
     }
 
+    // 특정 사용자의 Post 반환
     @Transactional
     public List<PostListResponseDto> findById(Long id) {
         return postsRepository.findAllUserPosts(id).stream()
@@ -71,6 +76,7 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    // 모든 Post 반환
     @Transactional(readOnly = true)
     public List<PostListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc().stream()
