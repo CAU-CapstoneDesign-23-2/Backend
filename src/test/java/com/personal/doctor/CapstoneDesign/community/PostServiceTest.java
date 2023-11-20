@@ -1,8 +1,9 @@
-package com.personal.doctor.CapstoneDesign.community.service;
+package com.personal.doctor.CapstoneDesign.community;
 
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostAnsweredResponseDto;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.community.service.PostService;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;

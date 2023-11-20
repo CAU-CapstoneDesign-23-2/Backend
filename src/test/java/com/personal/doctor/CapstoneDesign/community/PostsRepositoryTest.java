@@ -1,5 +1,7 @@
-package com.personal.doctor.CapstoneDesign.community.domain;
+package com.personal.doctor.CapstoneDesign.community;
 
+import com.personal.doctor.CapstoneDesign.community.domain.Posts;
+import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import org.junit.jupiter.api.AfterEach;

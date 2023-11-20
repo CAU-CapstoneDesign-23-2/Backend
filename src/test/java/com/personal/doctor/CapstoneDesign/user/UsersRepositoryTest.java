@@ -1,5 +1,7 @@
-package com.personal.doctor.CapstoneDesign.user.domain;
+package com.personal.doctor.CapstoneDesign.user;
 
+import com.personal.doctor.CapstoneDesign.user.domain.Users;
+import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
