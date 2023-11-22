@@ -16,18 +16,6 @@ public class PostController {
 
     private final PostService postService;
 
-    // 모든 게시물 반환
-    @GetMapping("/posts")
-    public List<PostListResponseDto> findAllPosts() {
-        return postService.findAllDesc();
-    }
-
-    // userId가 id인 사용자의 게시물 반환
-    @GetMapping("/posts/user/{userId}")
-    public List<PostListResponseDto> userPosts(@PathVariable Long userId) {
-        return postService.findById(userId);
-    }
-
     // post 저장
     @PostMapping("/post/{userId}")
     public Long savePost(@PathVariable Long userId,
@@ -42,16 +30,28 @@ public class PostController {
         return postService.update(postId, requestDto);
     }
 
+    // post 답변
+    @PostMapping("/post/answer/{postId}")
+    public Long answerPost(@PathVariable Long postId,
+                           @RequestBody PostAnsweredResponseDto responseDto) {
+        return postService.answered(postId, responseDto);
+    }
+
     // post 검색
     @PostMapping("/post/search")
     public List<PostListResponseDto> searchPost(@RequestBody String keyword) {
         return postService.search(keyword);
     }
 
-    // post 답변
-    @PostMapping("/post/answer/{postId}")
-    public Long answerPost(@PathVariable Long postId,
-                           @RequestBody PostAnsweredResponseDto responseDto) {
-        return postService.answered(postId, responseDto);
+    // 모든 게시물 반환
+    @GetMapping("/posts")
+    public List<PostListResponseDto> findAllPosts() {
+        return postService.findAllDesc();
+    }
+
+    // userId가 id인 사용자의 게시물 반환
+    @GetMapping("/posts/user/{userId}")
+    public List<PostListResponseDto> userPosts(@PathVariable Long userId) {
+        return postService.findById(userId);
     }
 }
