@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.user;
 
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.user.controller.dto.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -57,6 +58,22 @@ class UserServiceTest {
         Long deleteId = userService.delete(joinUserId);
 
         assertEquals(joinUserId, deleteId);
+    }
+
+    @Test
+    public void 사용자_수정() {
+        UserJoinRequestDto joinRequestDto = UserJoinRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
+                .build();
+        Long joinUserId = userService.join(joinRequestDto);
+        UserUpdateRequestDto updateRequestDto = UserUpdateRequestDto.builder()
+                .userName("Name")
+                .build();
+
+        Long updateId = userService.update(joinUserId, updateRequestDto);
+
+        assertEquals(joinUserId, updateId);
     }
 
 }
