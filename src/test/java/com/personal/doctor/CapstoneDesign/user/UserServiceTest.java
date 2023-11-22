@@ -24,7 +24,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void 사용자_저장() {
+    public void 사용자_회원가입() {
         UserJoinRequestDto requestDto = UserJoinRequestDto.builder()
                 .userID("ID")
                 .userPassword("PW")
@@ -32,6 +32,18 @@ class UserServiceTest {
         Long userId = userService.join(requestDto);
 
         assertNotNull(userId);
+    }
+
+    @Test
+    public void 사용자_로그인() {
+        UserJoinRequestDto joinRequestDto = UserJoinRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
+                .build();
+        Long joinUserId = userService.join(joinRequestDto);
+        Long loginUserId = userService.login(joinRequestDto);
+
+        assertEquals(joinUserId, loginUserId);
     }
 
 }
