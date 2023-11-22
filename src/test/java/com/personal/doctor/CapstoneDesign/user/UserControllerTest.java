@@ -117,4 +117,14 @@ class UserControllerTest {
                 .andExpect(content().string(String.valueOf(userId)));
     }
 
+    @Test
+    public void 사용자_역할수정() throws Exception {
+        mockMvc.perform(
+                        put("/user/role/" + userId)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.valueOf(userId)));
+    }
+
 }
