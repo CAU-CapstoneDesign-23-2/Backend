@@ -74,4 +74,22 @@ class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void 사용자_로그인() throws Exception {
+        Map<String, String> requestMap = new HashMap<>();
+        requestMap.put("userID", "ID");
+        requestMap.put("userPassword", "PW");
+
+
+        String content = new ObjectMapper().writeValueAsString(requestMap);
+        mockMvc.perform(
+                        post("/login")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(content)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.valueOf(userId)));
+    }
+
 }
