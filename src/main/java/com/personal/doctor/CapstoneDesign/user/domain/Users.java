@@ -38,7 +38,7 @@ public class Users {
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
 
-    @OneToOne(mappedBy = "users", fetch = FetchType.LAZY)
+    @OneToOne
     private Details details;
 
     @Builder
