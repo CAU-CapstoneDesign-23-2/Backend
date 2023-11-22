@@ -182,4 +182,32 @@ class PostControllerTest {
         assertEquals(1, posts.size());
     }
 
+    @Test
+    public void 게시물_모두반환() throws Exception {
+        PostSaveRequestDto post2 = PostSaveRequestDto.builder()
+                .title("title")
+                .category("category")
+                .question("question")
+                .build();
+        postService.save(userId, post2);
+        PostSaveRequestDto post3 = PostSaveRequestDto.builder()
+                .title("title")
+                .category("category")
+                .question("question")
+                .build();
+        postService.save(userId, post3);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/posts")
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = mvcResult.getResponse().getContentAsString();
+        List<PostListResponseDto> posts = new ObjectMapper().readValue(jsonResponse, new TypeReference<List<PostListResponseDto>>(){});
+
+        assertEquals(3, posts.size());
+    }
+
 }
