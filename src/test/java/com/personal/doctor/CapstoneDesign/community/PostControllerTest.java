@@ -1,6 +1,8 @@
 package com.personal.doctor.CapstoneDesign.community;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.personal.doctor.CapstoneDesign.community.controller.dto.PostListResponseDto;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
@@ -26,6 +28,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -135,6 +138,37 @@ class PostControllerTest {
         assertEquals("updateTitle", posts.getTitle());
         assertEquals("category", posts.getCategory());
         assertEquals("updateQuestion", posts.getQuestion());
+    }
+
+    @Test
+    public void 게시물_답변() throws Exception {
+        UserJoinRequestDto userRequestDto = UserJoinRequestDto.builder()
+                .userID("ID_doc")
+                .userPassword("PW_doc")
+                .build();
+        Long docID = userService.join(userRequestDto);
+        userService.updateRole(docID);
+
+        Map<String, String> requestMap = new HashMap<>();
+        requestMap.put("docName", "docName");
+        requestMap.put("answer", "answer");
+        String content = new ObjectMapper().writeValueAsString(requestMap);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        post("/post/answer/" + docID + "/" + postId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(content)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Long postIdTest = Long.parseLong(mvcResult.getResponse().getContentAsString());
+
+        Posts posts = postsRepository.findById(postIdTest).get();
+
+        assertEquals("docName", posts.getDocName());
+        assertEquals("answer", posts.getAnswer());
     }
 
 }
