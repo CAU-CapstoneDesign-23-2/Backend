@@ -25,22 +25,22 @@ public class UserController {
     }
 
     // 사용자 탈퇴
-    @DeleteMapping("/delete/{id}")
-    public Long delete(@PathVariable Long id) {
-        return userService.delete(id);
+    @DeleteMapping("/delete/{userId}")
+    public Long delete(@PathVariable Long userId) {
+        return userService.delete(userId);
     }
 
     // 사용자 정보 수정
-    @PutMapping("/user/{stuId}")
-    public Long updateUserName(@PathVariable Long stuId,
+    @PutMapping("/user/{userId}")
+    public Long updateUserName(@PathVariable Long userId,
                                @RequestBody UserUpdateRequestDto requestDto) {
-        return userService.update(stuId, requestDto);
+        return userService.update(userId, requestDto);
     }
 
     // 사용자 역할 수정
-    @PutMapping("/user/role/{stuId}")
-    public Long updateUserRole(@PathVariable Long stuId) {
-        return userService.updateRole(stuId);
+    @PutMapping("/user/role/{userId}")
+    public Long updateUserRole(@PathVariable Long userId) {
+        return userService.updateRole(userId);
     }
 
 }

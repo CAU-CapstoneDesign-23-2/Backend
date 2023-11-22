@@ -49,8 +49,8 @@ public class UserService {
 
     // 사용자 탈퇴
     @Transactional
-    public Long delete(Long id) {
-        Users users = usersRepository.findById(id)
+    public Long delete(Long userId) {
+        Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다"));
         users.beforeDelete();
         usersRepository.delete(users);
@@ -68,12 +68,12 @@ public class UserService {
 
     // 사용자 이름 수정
     @Transactional
-    public Long update(Long id, UserUpdateRequestDto requestDto) {
-        Users user = usersRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다. id=" + id));
+    public Long update(Long userId, UserUpdateRequestDto requestDto) {
+        Users user = usersRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다. id=" + userId));
         user.updateUserName(requestDto.getUserName());
 
-        return id;
+        return userId;
     }
 
     // 사용자 역할 변경 USER --> DOCTOR

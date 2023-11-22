@@ -28,8 +28,8 @@ public class PostService {
 
     // Post 저장
     @Transactional
-    public Long save(Long id, PostSaveRequestDto requestDto) {
-        Users user = usersRepository.findById(id)
+    public Long save(Long userId, PostSaveRequestDto requestDto) {
+        Users user = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
         requestDto.setUsers(user);
         Posts post = requestDto.toEntity();
@@ -42,22 +42,22 @@ public class PostService {
 
     // Post 수정
     @Transactional
-    public Long update(Long id, PostUpdateRequestDto requestDto) {
-        Posts posts = postsRepository.findById(id)
+    public Long update(Long postId, PostUpdateRequestDto requestDto) {
+        Posts posts = postsRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
         posts.updatePosts(requestDto.getTitle(), requestDto.getQuestion());
 
-        return id;
+        return postId;
     }
 
     // Post 답변
     @Transactional
-    public Long answered(Long id, PostAnsweredResponseDto requestDto) {
-        Posts posts = postsRepository.findById(id)
+    public Long answered(Long postId, PostAnsweredResponseDto requestDto) {
+        Posts posts = postsRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
         posts.answered(requestDto.getDocName(), requestDto.getAnswer());
 
-        return id;
+        return postId;
     }
 
     // Post 검색
@@ -70,8 +70,8 @@ public class PostService {
 
     // 특정 사용자의 Post 반환
     @Transactional
-    public List<PostListResponseDto> findById(Long id) {
-        return postsRepository.findAllUserPosts(id).stream()
+    public List<PostListResponseDto> findById(Long userId) {
+        return postsRepository.findAllUserPosts(userId).stream()
                 .map(PostListResponseDto::new)
                 .collect(Collectors.toList());
     }

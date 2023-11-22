@@ -23,23 +23,23 @@ public class PostController {
     }
 
     // userId가 id인 사용자의 게시물 반환
-    @GetMapping("/posts/user/{id}")
-    public List<PostListResponseDto> userPosts(@PathVariable Long id) {
-        return postService.findById(id);
+    @GetMapping("/posts/user/{userId}")
+    public List<PostListResponseDto> userPosts(@PathVariable Long userId) {
+        return postService.findById(userId);
     }
 
     // post 저장
-    @PostMapping("/post/{id}")
-    public Long savePost(@PathVariable Long id,
+    @PostMapping("/post/{userId}")
+    public Long savePost(@PathVariable Long userId,
                          @RequestBody PostSaveRequestDto requestDto) {
-        return postService.save(id, requestDto);
+        return postService.save(userId, requestDto);
     }
 
     // post 수정
-    @PutMapping("/post/update/{id}")
-    public Long updatePost(@PathVariable Long id,
+    @PutMapping("/post/update/{postId}")
+    public Long updatePost(@PathVariable Long postId,
                            @RequestBody PostUpdateRequestDto requestDto) {
-        return postService.update(id, requestDto);
+        return postService.update(postId, requestDto);
     }
 
     // post 검색
@@ -49,9 +49,9 @@ public class PostController {
     }
 
     // post 답변
-    @PostMapping("/post/answer/{id}")
-    public Long answerPost(@PathVariable Long id,
+    @PostMapping("/post/answer/{postId}")
+    public Long answerPost(@PathVariable Long postId,
                            @RequestBody PostAnsweredResponseDto responseDto) {
-        return postService.answered(id, responseDto);
+        return postService.answered(postId, responseDto);
     }
 }
