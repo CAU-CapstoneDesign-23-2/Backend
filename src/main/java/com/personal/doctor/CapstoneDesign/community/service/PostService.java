@@ -33,8 +33,8 @@ public class PostService {
                 .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
         requestDto.setUsers(user);
         Posts post = requestDto.toEntity();
+
         user.addPosts(post);
-        post.setUser(user);
         postsRepository.save(post);
 
         return post.getId();

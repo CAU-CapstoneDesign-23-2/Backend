@@ -30,8 +30,8 @@ public class Posts {
     @Column
     private String answer;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, optional = false)
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "Users_id")
     private Users users;
 
     @Builder
