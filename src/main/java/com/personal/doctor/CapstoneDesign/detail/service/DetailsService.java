@@ -50,4 +50,9 @@ public class DetailsService {
         return details.getId();
     }
 
+    @Transactional
+    public void deleteAll() {
+        detailsRepository.deleteAll();
+    }
+
 }
