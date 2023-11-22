@@ -30,6 +30,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -119,7 +120,7 @@ class PostControllerTest {
         String content = new ObjectMapper().writeValueAsString(requestMap);
 
         MvcResult mvcResult = mockMvc.perform(
-                        post("/post/" + userId)
+                        put("/post/update/" + postId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
                 )
@@ -128,13 +129,12 @@ class PostControllerTest {
                 .andReturn();
 
         Long postIdTest = Long.parseLong(mvcResult.getResponse().getContentAsString());
-        System.out.println("RESPONSE: " + postIdTest);
 
         Posts posts = postsRepository.findById(postIdTest).get();
 
-        assertEquals("title", posts.getTitle());
+        assertEquals("updateTitle", posts.getTitle());
         assertEquals("category", posts.getCategory());
-        assertEquals("question", posts.getQuestion());
+        assertEquals("updateQuestion", posts.getQuestion());
     }
 
 }
