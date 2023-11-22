@@ -2,7 +2,10 @@ package com.personal.doctor.CapstoneDesign.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.user.domain.Users;
+import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +41,9 @@ class UserControllerTest {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UsersRepository usersRepository;
 
     private static Long userId;
 
@@ -115,6 +121,10 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(String.valueOf(userId)));
+
+        Users users = usersRepository.findById(userId).get();
+
+        assertEquals("updateName", users.getUserName());
     }
 
     @Test
@@ -125,6 +135,10 @@ class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(String.valueOf(userId)));
+
+        Users users = usersRepository.findById(userId).get();
+
+        assertEquals("DOCTOR", users.getRole().toString());
     }
 
 }
