@@ -43,6 +43,4 @@ public class UserController {
         return userService.updateRole(stuId);
     }
 
-    // TODO: Details 저장 기능
-
 }
