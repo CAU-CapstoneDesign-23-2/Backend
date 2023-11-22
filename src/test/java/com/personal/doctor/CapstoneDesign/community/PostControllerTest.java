@@ -10,9 +10,6 @@ import com.personal.doctor.CapstoneDesign.community.service.PostService;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
-import com.personal.doctor.CapstoneDesign.util.exceptions.PostNOTExistException;
-import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
-import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,11 +29,10 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -106,8 +102,6 @@ class PostControllerTest {
                 .andReturn();
 
         Long postIdTest = Long.parseLong(mvcResult.getResponse().getContentAsString());
-        System.out.println("RESPONSE: " + postIdTest);
-
         Posts posts = postsRepository.findById(postIdTest).get();
 
         assertEquals("title", posts.getTitle());
@@ -169,6 +163,23 @@ class PostControllerTest {
 
         assertEquals("docName", posts.getDocName());
         assertEquals("answer", posts.getAnswer());
+    }
+
+    @Test
+    public void 게시물_검색() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(
+                        post("/post/search")
+                                .contentType(MediaType.TEXT_PLAIN)
+                                .content("que")
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = mvcResult.getResponse().getContentAsString();
+        List<PostListResponseDto> posts = new ObjectMapper().readValue(jsonResponse, new TypeReference<List<PostListResponseDto>>(){});
+
+        assertEquals(1, posts.size());
     }
 
 }
