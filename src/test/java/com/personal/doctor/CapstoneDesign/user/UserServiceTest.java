@@ -46,4 +46,17 @@ class UserServiceTest {
         assertEquals(joinUserId, loginUserId);
     }
 
+    @Test
+    public void 사용자_탈퇴() {
+        UserJoinRequestDto joinRequestDto = UserJoinRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
+                .build();
+        Long joinUserId = userService.join(joinRequestDto);
+
+        Long deleteId = userService.delete(joinUserId);
+
+        assertEquals(joinUserId, deleteId);
+    }
+
 }
