@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.detail.controller.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +19,7 @@ public class DetailsUpdateRequestDto {
     private String hobby3;
     private String medicine;
 
+    @Builder
     public DetailsUpdateRequestDto(String age, String gender, String disease1, String disease2, String disease3,
                                  String surgery, String hobby1, String hobby2, String hobby3, String medicine) {
         this.age = age;
