@@ -20,8 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -95,7 +94,23 @@ class UserControllerTest {
     @Test
     public void 사용자_탈퇴() throws Exception {
         mockMvc.perform(
-                        delete("/delete/" + userId)
+                        delete("/user/" + userId)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.valueOf(userId)));
+    }
+
+    @Test
+    public void 사용자_수정() throws Exception {
+        Map<String, String> requestMap = new HashMap<>();
+        requestMap.put("userName", "updateName");
+
+        String content = new ObjectMapper().writeValueAsString(requestMap);
+        mockMvc.perform(
+                        put("/user/" + userId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(content)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
