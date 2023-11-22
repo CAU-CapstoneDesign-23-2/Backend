@@ -43,6 +43,7 @@ class DetailsServiceTest {
     @AfterEach
     public void clean() {
         detailsService.deleteAll();
+        userService.deleteAll();
     }
 
     @Test
