@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.detail;
 
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
 import com.personal.doctor.CapstoneDesign.detail.service.DetailsService;
@@ -59,6 +60,33 @@ class DetailsServiceTest {
         Details details = detailsRepository.findById(detailID).get();
 
         assertEquals("Man", details.getGender());
+    }
+
+    @Test
+    public void 세부사항_수정() {
+        DetailsSaveRequestDto saveRequestDto = DetailsSaveRequestDto.builder()
+                .age("65")
+                .gender("Woman")
+                .disease1("stomach")
+                .hobby1("swimming")
+                .build();
+        Long saved = detailsService.save(userId, saveRequestDto);
+
+        DetailsUpdateRequestDto updateRequestDto = DetailsUpdateRequestDto.builder()
+                .age("66")
+                .gender("Woman")
+                .disease1(null)
+                .hobby1("swimming")
+                .hobby2("soccer")
+                .build();
+        Long updated = detailsService.update(userId, updateRequestDto);
+
+        Details userDetails = detailsRepository.findUserDetails(userId);
+
+        assertEquals(saved, updated);
+        assertEquals("66", userDetails.getAge());
+        assertNull(userDetails.getDisease1());
+        assertEquals("soccer", userDetails.getHobby2());
     }
 
 }
