@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.detail.service;
 
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
@@ -48,6 +49,12 @@ public class DetailsService {
         details.setMedicine(requestDto.getMedicine());
 
         return details.getId();
+    }
+
+    @Transactional
+    public DetailsResponseDto details(Long userId) {
+        Details details = detailsRepository.findUserDetails(userId);
+        return new DetailsResponseDto(details);
     }
 
     @Transactional

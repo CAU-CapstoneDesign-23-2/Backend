@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.detail.controller;
 
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.service.DetailsService;
@@ -25,5 +26,11 @@ public class DetailController {
                        @RequestBody DetailsUpdateRequestDto requestDto) {
         return detailsService.update(userId, requestDto);
     }
+
+    // 세부정보 반환
+//    @GetMapping("/detail/{userId}")
+//    public DetailsResponseDto details(@PathVariable Long userId) {
+//        return
+//    }
 
 }
