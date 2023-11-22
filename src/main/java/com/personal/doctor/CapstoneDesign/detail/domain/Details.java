@@ -51,7 +51,7 @@ public class Details {
     @Column
     private String medicine;
 
-    @OneToOne(mappedBy = "details", fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToOne(mappedBy = "details", orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Users users;
 
