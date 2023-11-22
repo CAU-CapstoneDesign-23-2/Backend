@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.user.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class Users {
     @Column
     private String userName;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
 

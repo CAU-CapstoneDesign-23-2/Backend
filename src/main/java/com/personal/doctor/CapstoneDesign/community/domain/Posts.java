@@ -1,5 +1,7 @@
 package com.personal.doctor.CapstoneDesign.community.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -30,7 +32,8 @@ public class Posts {
     @Column
     private String answer;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonBackReference
+    @ManyToOne
     @JoinColumn(name = "Users_id")
     private Users users;
 
