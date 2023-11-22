@@ -2,6 +2,7 @@ package com.personal.doctor.CapstoneDesign.detail.controller.dto;
 
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +22,7 @@ public class DetailsSaveRequestDto {
     private String medicine;
     private Users users;
 
+    @Builder
     public DetailsSaveRequestDto(String age, String gender, String disease1, String disease2, String disease3,
                                  String surgery, String hobby1, String hobby2, String hobby3, String medicine) {
         this.age = age;
