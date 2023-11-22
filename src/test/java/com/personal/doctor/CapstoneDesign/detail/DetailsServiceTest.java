@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.detail;
 
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
@@ -87,6 +88,26 @@ class DetailsServiceTest {
         assertEquals("66", userDetails.getAge());
         assertNull(userDetails.getDisease1());
         assertEquals("soccer", userDetails.getHobby2());
+    }
+
+    @Test
+    public void 세부사항_반환() {
+        DetailsSaveRequestDto requestDto = DetailsSaveRequestDto.builder()
+                .age("71")
+                .gender("Man")
+                .disease1("headache")
+                .hobby1("golf")
+                .medicine("cold")
+                .build();
+        Long detailID = detailsService.save(userId, requestDto);
+
+        DetailsResponseDto responseDto = detailsService.details(userId);
+
+        assertEquals("71", responseDto.getAge());
+        assertEquals("Man", responseDto.getGender());
+        assertEquals("headache", responseDto.getDisease1());
+        assertEquals("golf", responseDto.getHobby1());
+        assertEquals("cold", responseDto.getMedicine());
     }
 
 }
