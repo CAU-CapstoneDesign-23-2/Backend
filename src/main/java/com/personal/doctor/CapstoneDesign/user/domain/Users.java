@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +47,8 @@ public class Users {
         this.role = Role.USER;
     }
 
-    public Long updateRole() {
+    public void updateRole() {
         this.role = Role.DOCTOR;
-        return this.id;
     }
 
     public void updateUserName(String userName) {

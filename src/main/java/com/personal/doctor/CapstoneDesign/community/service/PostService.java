@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.community.service;
 
+import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostAnsweredResponseDto;
 import com.personal.doctor.CapstoneDesign.community.controller.dto.PostListResponseDto;
@@ -9,6 +10,7 @@ import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
+import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotQualifiedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,12 +54,18 @@ public class PostService {
 
     // Post 답변
     @Transactional
-    public Long answered(Long postId, PostAnsweredResponseDto requestDto) {
+    public Long answered(Long userId, Long postId, PostAnsweredResponseDto requestDto) {
+        Users users = usersRepository.findById(userId)
+                .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
         Posts posts = postsRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시물입니다."));
-        posts.answered(requestDto.getDocName(), requestDto.getAnswer());
 
-        return postId;
+        if (users.getRole().toString().trim().equals("DOCTOR")) {
+            posts.answered(requestDto.getDocName(), requestDto.getAnswer());
+            return postId;
+        } else {
+            throw new UserNotQualifiedException("권한이 없습니다.");
+        }
     }
 
     // Post 검색

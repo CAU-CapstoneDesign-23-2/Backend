@@ -16,7 +16,7 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
     @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
     List<Posts> findAllDesc();
 
-    @Query("SELECT p FROM Posts p WHERE p.title LIKE %:keyword% ORDER BY p.id DESC")
+    @Query("SELECT p FROM Posts p WHERE (p.title LIKE %:keyword%) OR (p.question LIKE %:keyword%) ORDER BY p.id DESC")
     List<Posts> findPostsByKeyword(@Param("keyword") String keyword);
 
     @Query("SELECT p FROM Posts p WHERE p.users.id = :id ORDER BY p.id DESC ")

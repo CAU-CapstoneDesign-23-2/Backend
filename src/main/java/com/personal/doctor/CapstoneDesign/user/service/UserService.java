@@ -81,7 +81,8 @@ public class UserService {
     public Long updateRole(Long id) {
         Users users = usersRepository.findById(id)
                 .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
-        return users.updateRole();
+        users.updateRole();
+        return id;
     }
 
     @Transactional

@@ -7,6 +7,8 @@ import com.personal.doctor.CapstoneDesign.community.service.PostService;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
+import com.personal.doctor.CapstoneDesign.user.domain.Users;
+import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.util.exceptions.PostNOTExistException;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;
@@ -30,12 +32,16 @@ class PostServiceTest {
     private PostService postService;
 
     @Autowired
+    private UsersRepository usersRepository;
+
+    @Autowired
     private PostsRepository postsRepository;
 
     @AfterEach
     public void clean() {
         postsRepository.deleteAll();
         postService.deleteAll();
+        usersRepository.deleteAll();
         userService.deleteAll();
     }
 
@@ -93,15 +99,24 @@ class PostServiceTest {
     @Rollback
     public void 게시물_답변() {
         UserJoinRequestDto userRequestDto = UserJoinRequestDto.builder()
-                .userID("ID")
-                .userPassword("PW")
+                .userID("ID_usr")
+                .userPassword("PW_usr")
                 .build();
         Long userID = userService.join(userRequestDto);
+
+        UserJoinRequestDto doctorRequestDto = UserJoinRequestDto.builder()
+                .userID("ID_doc")
+                .userPassword("PW_doc")
+                .build();
+        Long doctorID = userService.join(doctorRequestDto);
+
+        Users doctor = usersRepository.findById(doctorID).get();
+        userService.updateRole(doctorID);
 
         PostSaveRequestDto postRequestDto = PostSaveRequestDto.builder()
                 .title("title")
                 .category("category")
-                .question("question1")
+                .question("question")
                 .build();
         Long postID = postService.save(userID, postRequestDto);
 
@@ -109,7 +124,7 @@ class PostServiceTest {
                 .answer("answer")
                 .docName("docName")
                 .build();
-        postService.answered(postID, answeredResponseDto);
+        postService.answered(doctorID, postID, answeredResponseDto);
 
         Posts posts = postsRepository.findById(postID)
                 .orElseThrow(() -> new PostNOTExistException("게시물이 존재하지 않습니다."));

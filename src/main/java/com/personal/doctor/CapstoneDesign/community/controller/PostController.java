@@ -31,10 +31,11 @@ public class PostController {
     }
 
     // post 답변
-    @PostMapping("/post/answer/{postId}")
-    public Long answerPost(@PathVariable Long postId,
+    @PostMapping("/post/answer/{userId}/{postId}")
+    public Long answerPost(@PathVariable Long userId,
+                           @PathVariable Long postId,
                            @RequestBody PostAnsweredResponseDto responseDto) {
-        return postService.answered(postId, responseDto);
+        return postService.answered(userId, postId, responseDto);
     }
 
     // post 검색
