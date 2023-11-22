@@ -210,4 +210,31 @@ class PostControllerTest {
         assertEquals(3, posts.size());
     }
 
+    @Test
+    public void 게시물_반환() throws Exception {
+        UserJoinRequestDto anotherUser = UserJoinRequestDto.builder()
+                .userID("otherID")
+                .userPassword("otherPW")
+                .build();
+        Long otherUser = userService.join(anotherUser);
+        PostSaveRequestDto anotherPost = PostSaveRequestDto.builder()
+                .title("title")
+                .category("category")
+                .question("question")
+                .build();
+        postService.save(otherUser, anotherPost);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/posts/user/" + userId)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = mvcResult.getResponse().getContentAsString();
+        List<PostListResponseDto> posts = new ObjectMapper().readValue(jsonResponse, new TypeReference<List<PostListResponseDto>>(){});
+
+        assertEquals(1, posts.size());
+    }
+
 }
