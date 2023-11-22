@@ -24,31 +24,29 @@ public class DetailsService {
         Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
         requestDto.setUsers(users);
-
         Details details = requestDto.toEntity();
         detailsRepository.save(details);
+        users.updateDetails(details);
 
         return details.getId();
     }
 
     @Transactional
     public Long update(Long userId, DetailsUpdateRequestDto requestDto) {
-        Users users = usersRepository.findById(userId)
-                .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
 
-        Details details = users.getDetails();
-        details.setAge(requestDto.getAge());
-        details.setGender(requestDto.getGender());
-        details.setDisease1(requestDto.getDisease1());
-        details.setDisease2(requestDto.getDisease2());
-        details.setDisease3(requestDto.getDisease3());
-        details.setSurgery(requestDto.getSurgery());
-        details.setHobby1(requestDto.getHobby1());
-        details.setHobby2(requestDto.getHobby2());
-        details.setHobby3(requestDto.getHobby3());
-        details.setMedicine(requestDto.getMedicine());
+        Details userDetails = detailsRepository.findUserDetails(userId);
+        userDetails.setAge(requestDto.getAge());
+        userDetails.setGender(requestDto.getGender());
+        userDetails.setDisease1(requestDto.getDisease1());
+        userDetails.setDisease2(requestDto.getDisease2());
+        userDetails.setDisease3(requestDto.getDisease3());
+        userDetails.setSurgery(requestDto.getSurgery());
+        userDetails.setHobby1(requestDto.getHobby1());
+        userDetails.setHobby2(requestDto.getHobby2());
+        userDetails.setHobby3(requestDto.getHobby3());
+        userDetails.setMedicine(requestDto.getMedicine());
 
-        return details.getId();
+        return userDetails.getId();
     }
 
     @Transactional
