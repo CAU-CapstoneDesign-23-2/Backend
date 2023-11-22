@@ -28,9 +28,9 @@ public class DetailController {
     }
 
     // 세부정보 반환
-//    @GetMapping("/detail/{userId}")
-//    public DetailsResponseDto details(@PathVariable Long userId) {
-//        return
-//    }
+    @GetMapping("/detail/{userId}")
+    public DetailsResponseDto details(@PathVariable Long userId) {
+        return detailsService.details(userId);
+    }
 
 }
