@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -80,12 +81,21 @@ class UserControllerTest {
         requestMap.put("userID", "ID");
         requestMap.put("userPassword", "PW");
 
-
         String content = new ObjectMapper().writeValueAsString(requestMap);
         mockMvc.perform(
                         post("/login")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.valueOf(userId)));
+    }
+
+    @Test
+    public void 사용자_탈퇴() throws Exception {
+        mockMvc.perform(
+                        delete("/delete/" + userId)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
