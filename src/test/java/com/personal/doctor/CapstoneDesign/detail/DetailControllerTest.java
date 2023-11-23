@@ -2,8 +2,6 @@ package com.personal.doctor.CapstoneDesign.detail;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.personal.doctor.CapstoneDesign.community.controller.dto.PostListResponseDto;
-import com.personal.doctor.CapstoneDesign.detail.controller.DetailController;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
@@ -11,8 +9,6 @@ import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
 import com.personal.doctor.CapstoneDesign.detail.service.DetailsService;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
-import org.aspectj.lang.annotation.Before;
-import org.h2.engine.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,14 +16,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockReset;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
