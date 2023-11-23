@@ -2,7 +2,7 @@ package com.personal.doctor.CapstoneDesign.user.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
-import com.personal.doctor.CapstoneDesign.detail.domain.Details;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.Details;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,7 +1,7 @@
-package com.personal.doctor.CapstoneDesign.detail.controller.dto;
+package com.personal.doctor.CapstoneDesign.userDetail.controller.dto;
 
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
-import com.personal.doctor.CapstoneDesign.detail.domain.Details;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.Details;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

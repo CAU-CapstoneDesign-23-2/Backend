@@ -1,9 +1,9 @@
-package com.personal.doctor.CapstoneDesign.detail.controller;
+package com.personal.doctor.CapstoneDesign.userDetail.controller;
 
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
-import com.personal.doctor.CapstoneDesign.detail.service.DetailsService;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsResponseDto;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.userDetail.service.DetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

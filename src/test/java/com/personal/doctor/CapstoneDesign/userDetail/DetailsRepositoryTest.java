@@ -1,7 +1,7 @@
-package com.personal.doctor.CapstoneDesign.detail;
+package com.personal.doctor.CapstoneDesign.userDetail;
 
-import com.personal.doctor.CapstoneDesign.detail.domain.Details;
-import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.Details;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.DetailsRepository;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;

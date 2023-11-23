@@ -1,12 +1,12 @@
-package com.personal.doctor.CapstoneDesign.detail.service;
+package com.personal.doctor.CapstoneDesign.userDetail.service;
 
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsResponseDto;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
-import com.personal.doctor.CapstoneDesign.detail.domain.Details;
-import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.Details;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.DetailsRepository;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

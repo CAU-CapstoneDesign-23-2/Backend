@@ -1,11 +1,11 @@
-package com.personal.doctor.CapstoneDesign.detail;
+package com.personal.doctor.CapstoneDesign.userDetail;
 
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
-import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsUpdateRequestDto;
-import com.personal.doctor.CapstoneDesign.detail.domain.Details;
-import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
-import com.personal.doctor.CapstoneDesign.detail.service.DetailsService;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsResponseDto;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsSaveRequestDto;
+import com.personal.doctor.CapstoneDesign.userDetail.controller.dto.DetailsUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.Details;
+import com.personal.doctor.CapstoneDesign.userDetail.domain.DetailsRepository;
+import com.personal.doctor.CapstoneDesign.userDetail.service.DetailsService;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;

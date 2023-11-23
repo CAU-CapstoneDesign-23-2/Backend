@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.detail.domain;
+package com.personal.doctor.CapstoneDesign.userDetail.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

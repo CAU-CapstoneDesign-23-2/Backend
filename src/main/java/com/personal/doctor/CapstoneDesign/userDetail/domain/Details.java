@@ -1,4 +1,4 @@
-package com.personal.doctor.CapstoneDesign.detail.domain;
+package com.personal.doctor.CapstoneDesign.userDetail.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
