@@ -3,7 +3,9 @@ package com.personal.doctor.CapstoneDesign.detail.controller.dto;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Getter
 public class DetailsResponseDto {
 
