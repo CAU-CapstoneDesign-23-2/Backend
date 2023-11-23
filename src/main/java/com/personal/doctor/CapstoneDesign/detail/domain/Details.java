@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.detail.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -51,6 +52,7 @@ public class Details {
     @Column
     private String medicine;
 
+    @JsonBackReference
     @OneToOne(mappedBy = "details", orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Users users;

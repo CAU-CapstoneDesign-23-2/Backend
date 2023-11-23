@@ -38,6 +38,7 @@ public class Users {
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToOne
     private Details details;
 
