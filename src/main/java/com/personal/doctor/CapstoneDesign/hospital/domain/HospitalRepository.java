@@ -14,4 +14,10 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long> {
     @Query("SELECT h FROM Hospital h WHERE h.name LIKE %:type% ORDER BY h.id DESC")
     List<Hospital> findHospitalsByName(@Param("keyword") String type);
 
+    // 사용자가 입력한 위치를 바탕으로 병원 정보 찾기
+    @Query("SELECT h FROM Hospital h WHERE (h.city = :city) AND (h.district = :district OR :district IS NULL) AND (h.town = :town OR :town IS NULL) ORDER BY h.id DESC")
+    List<Hospital> findHospitalByAddress(@Param("city") String city,
+                                         @Param("district") String district,
+                                         @Param("town") String town);
+
 }
