@@ -25,4 +25,11 @@ public class HospitalService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<HospitalListResponseDto> findHospitalAddress(HospitalResponseDto responseDto) {
+        return hospitalRepository.findHospitalByAddress(responseDto.getCity(), responseDto.getDistrict(), responseDto.getTown()).stream()
+                .map(HospitalListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
 }
