@@ -62,7 +62,7 @@ public class UserService {
     public void findDuplicateUser(String userID) {
         Optional<Users> user = usersRepository.findByUserID(userID);
         if(user.isPresent()) {
-            throw new UserAlreadyExistException("이미 "+userID+"를 사용하는 사용자가 존재합니다");
+            throw new UserAlreadyExistException("이미 " + userID + "를 사용하는 사용자가 존재합니다");
         }
     }
 
@@ -70,7 +70,7 @@ public class UserService {
     @Transactional
     public Long update(Long userId, UserUpdateRequestDto requestDto) {
         Users user = usersRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다. id=" + userId));
+                .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
         user.updateUserData(requestDto.getUserName(), requestDto.getLocation());
 
         return userId;
