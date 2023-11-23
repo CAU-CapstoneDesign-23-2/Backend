@@ -1,7 +1,6 @@
 package com.personal.doctor.CapstoneDesign.hospital.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class hospital {
+public class Hospital {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +39,7 @@ public class hospital {
     private String telephone;   // 전화번호
 
     @Builder
-    public hospital(String name, String code, String city, String district, String town, String postalCode, String address, String telephone) {
+    public Hospital(String name, String code, String city, String district, String town, String postalCode, String address, String telephone) {
         this.name = name;
         this.code = code;
         this.city = city;
