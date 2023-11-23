@@ -1,7 +1,10 @@
 package com.personal.doctor.CapstoneDesign.detail;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.personal.doctor.CapstoneDesign.community.controller.dto.PostListResponseDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.DetailController;
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsResponseDto;
 import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
@@ -17,16 +20,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockReset;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,6 +65,7 @@ class DetailControllerTest {
 
     @AfterEach
     public void clean() {
+        detailsRepository.deleteAll();
         detailsService.deleteAll();
         userService.deleteAll();
     }
@@ -140,6 +146,36 @@ class DetailControllerTest {
         assertEquals("탁구", userDetails.getHobby2());
         assertEquals("산책", userDetails.getHobby3());
         assertEquals("영양제", userDetails.getMedicine());
+    }
+
+    @Test
+    public void 세부정보_반환() throws Exception {
+        DetailsSaveRequestDto saveRequestDto = DetailsSaveRequestDto.builder()
+                .age("72")
+                .gender("여자")
+                .disease1("골다공증")
+                .hobby1("수영")
+                .hobby2("탁구")
+                .hobby3("등산")
+                .build();
+        Long detailId = detailsService.save(userId, saveRequestDto);
+
+        MvcResult mvcResult = mockMvc.perform(
+                        get("/detail/" + userId)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String jsonResponse = mvcResult.getResponse().getContentAsString();
+        DetailsResponseDto detail = new ObjectMapper().readValue(jsonResponse, new TypeReference<DetailsResponseDto>() {});
+
+        assertEquals("72", detail.getAge());
+        assertEquals("여자", detail.getGender());
+        assertEquals("골다공증", detail.getDisease1());
+        assertEquals("수영", detail.getHobby1());
+        assertEquals("탁구", detail.getHobby2());
+        assertEquals("등산", detail.getHobby3());
     }
 
 }
