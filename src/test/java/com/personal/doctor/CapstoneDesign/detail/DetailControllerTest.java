@@ -2,6 +2,7 @@ package com.personal.doctor.CapstoneDesign.detail;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.personal.doctor.CapstoneDesign.detail.controller.DetailController;
+import com.personal.doctor.CapstoneDesign.detail.controller.dto.DetailsSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.detail.domain.Details;
 import com.personal.doctor.CapstoneDesign.detail.domain.DetailsRepository;
 import com.personal.doctor.CapstoneDesign.detail.service.DetailsService;
@@ -25,6 +26,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -93,6 +95,51 @@ class DetailControllerTest {
         assertEquals("축구", userDetails.getHobby1());
         assertEquals("야구", userDetails.getHobby2());
         assertEquals("고혈압 약", userDetails.getMedicine());
+    }
+
+    @Test
+    public void 세부정보_수정() throws Exception {
+        DetailsSaveRequestDto saveRequestDto = DetailsSaveRequestDto.builder()
+                .age("72")
+                .gender("여자")
+                .disease1("골다공증")
+                .hobby1("수영")
+                .hobby2("탁구")
+                .hobby3("등산")
+                .build();
+        Long detailId = detailsService.save(userId, saveRequestDto);
+
+        Map<String, String> requestMap = new HashMap<>();
+        requestMap.put("age", "73");
+        requestMap.put("gender", "여자");
+        requestMap.put("disease1", "골다공증");
+        requestMap.put("disease2", "허리 디스크");
+        requestMap.put("disease3", "목 디스크");
+        requestMap.put("hobby1", "수영");
+        requestMap.put("hobby2", "탁구");
+        requestMap.put("hobby3", "산책");
+        requestMap.put("medicine", "영양제");
+        String content = new ObjectMapper().writeValueAsString(requestMap);
+
+        mockMvc.perform(
+                        put("/detail/" + userId)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(content)
+                )
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        Details userDetails = detailsRepository.findUserDetails(userId);
+
+        assertEquals("73", userDetails.getAge());
+        assertEquals("여자", userDetails.getGender());
+        assertEquals("골다공증", userDetails.getDisease1());
+        assertEquals("허리 디스크", userDetails.getDisease2());
+        assertEquals("목 디스크", userDetails.getDisease3());
+        assertEquals("수영", userDetails.getHobby1());
+        assertEquals("탁구", userDetails.getHobby2());
+        assertEquals("산책", userDetails.getHobby3());
+        assertEquals("영양제", userDetails.getMedicine());
     }
 
 }
