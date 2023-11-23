@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,9 @@ public class Users {
     @Column
     private String userName;
 
+    @Column
+    private String location;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
     private List<Posts> posts = new ArrayList<>();
@@ -43,10 +45,11 @@ public class Users {
     private Details details;
 
     @Builder
-    public Users(String userID, String userPassword, String userName) {
+    public Users(String userID, String userPassword, String userName, String location) {
         this.userID = userID;
         this.userPassword = userPassword;
         this.userName = userName;
+        this.location = location;
         this.role = Role.USER;
     }
 
@@ -54,8 +57,9 @@ public class Users {
         this.role = Role.DOCTOR;
     }
 
-    public void updateUserName(String userName) {
+    public void updateUserData(String userName, String location) {
         this.userName = userName;
+        this.location = location;
     }
 
     public void updateDetails(Details details) {
