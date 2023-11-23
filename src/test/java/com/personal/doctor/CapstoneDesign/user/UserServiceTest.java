@@ -2,6 +2,8 @@ package com.personal.doctor.CapstoneDesign.user;
 
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserUpdateRequestDto;
+import com.personal.doctor.CapstoneDesign.user.domain.Users;
+import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +21,12 @@ class UserServiceTest {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UsersRepository usersRepository;
+
     @AfterEach
     public void clean() {
+        usersRepository.deleteAll();
         userService.deleteAll();
     }
 
@@ -68,12 +74,17 @@ class UserServiceTest {
                 .build();
         Long joinUserId = userService.join(joinRequestDto);
         UserUpdateRequestDto updateRequestDto = UserUpdateRequestDto.builder()
-                .userName("Name")
+                .userName("이름")
+                .location("강남구")
                 .build();
 
         Long updateId = userService.update(joinUserId, updateRequestDto);
 
+        Users users = usersRepository.findById(updateId).get();
+
         assertEquals(joinUserId, updateId);
+        assertEquals("이름", users.getUserName());
+        assertEquals("강남구", users.getLocation());
     }
 
 }

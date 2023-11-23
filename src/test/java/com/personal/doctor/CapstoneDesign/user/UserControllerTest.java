@@ -5,7 +5,6 @@ import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -110,7 +109,8 @@ class UserControllerTest {
     @Test
     public void 사용자_수정() throws Exception {
         Map<String, String> requestMap = new HashMap<>();
-        requestMap.put("userName", "updateName");
+        requestMap.put("userName", "수정된 이름");
+        requestMap.put("location", "동작구");
 
         String content = new ObjectMapper().writeValueAsString(requestMap);
         mockMvc.perform(
@@ -124,7 +124,8 @@ class UserControllerTest {
 
         Users users = usersRepository.findById(userId).get();
 
-        assertEquals("updateName", users.getUserName());
+        assertEquals("수정된 이름", users.getUserName());
+        assertEquals("동작구", users.getLocation());
     }
 
     @Test
