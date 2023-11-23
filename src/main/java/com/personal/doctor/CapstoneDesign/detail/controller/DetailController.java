@@ -28,7 +28,7 @@ public class DetailController {
     }
 
     // 세부정보 반환
-    @GetMapping("/detail/{userId}")
+    @GetMapping(value = "/detail/{userId}", produces = "application/json;charset=UTF-8")
     public DetailsResponseDto details(@PathVariable Long userId) {
         return detailsService.details(userId);
     }

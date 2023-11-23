@@ -39,19 +39,19 @@ public class PostController {
     }
 
     // post 검색
-    @PostMapping("/post/search")
+    @PostMapping(value = "/post/search", produces = "application/json;charset=UTF-8")
     public List<PostListResponseDto> searchPost(@RequestBody String keyword) {
         return postService.search(keyword);
     }
 
     // 모든 게시물 반환
-    @GetMapping("/posts")
+    @GetMapping(value = "/posts", produces = "application/json;charset=UTF-8")
     public List<PostListResponseDto> findAllPosts() {
         return postService.findAllDesc();
     }
 
     // userId가 id인 사용자의 게시물 반환
-    @GetMapping("/posts/user/{userId}")
+    @GetMapping(value = "/posts/user/{userId}", produces = "application/json;charset=UTF-8")
     public List<PostListResponseDto> userPosts(@PathVariable Long userId) {
         return postService.findById(userId);
     }
