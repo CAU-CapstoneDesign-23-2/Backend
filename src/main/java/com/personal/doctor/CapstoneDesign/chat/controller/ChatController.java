@@ -1,11 +1,14 @@
 package com.personal.doctor.CapstoneDesign.chat.controller;
 
+import com.personal.doctor.CapstoneDesign.chat.controller.dto.ChatRequestDto;
 import com.personal.doctor.CapstoneDesign.chat.controller.dto.ChatSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.chat.service.ChatService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class ChatController {
@@ -22,4 +25,11 @@ public class ChatController {
                      @RequestBody ChatSaveRequestDto chatSaveRequestDto) {
         return chatService.save(userId, chatSaveRequestDto);
     }
+
+    // 사용자의 모든 채팅 반환
+    @PostMapping("/chat/user/{userId}")
+    public List<ChatRequestDto> userChats(@PathVariable Long userId) {
+        return chatService.userChats(userId);
+    }
+
 }
