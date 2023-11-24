@@ -28,7 +28,7 @@ public class Chat {
     private Users users;
 
     @Builder
-    public void chat(Long type, String content) {
+    public Chat(Long type, String content) {
         this.type = type;
         this.content = content;
     }
