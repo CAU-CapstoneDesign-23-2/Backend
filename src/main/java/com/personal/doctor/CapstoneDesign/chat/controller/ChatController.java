@@ -20,14 +20,14 @@ public class ChatController {
     }
 
     // 채팅 저장
-    @PostMapping("/chat/{userId}")
+    @PostMapping(value = "/chat/{userId}", produces = "application/json;charset=UTF-8")
     public Long save(@PathVariable Long userId,
                      @RequestBody ChatSaveRequestDto chatSaveRequestDto) {
         return chatService.save(userId, chatSaveRequestDto);
     }
 
     // 사용자의 모든 채팅 반환
-    @PostMapping("/chat/user/{userId}")
+    @PostMapping(value = "/userChats/{userId}", produces = "application/json;charset=UTF-8")
     public List<ChatRequestDto> userChats(@PathVariable Long userId) {
         return chatService.userChats(userId);
     }
