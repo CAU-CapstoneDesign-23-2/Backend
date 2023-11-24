@@ -29,6 +29,8 @@ public class ChatService {
     public Long save(Long userId, ChatSaveRequestDto chatSaveRequestDto) {
         Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
+
+        chatSaveRequestDto.setUsers(users);
         Chat chat = chatSaveRequestDto.toEntity();
 
         users.addChats(chat);
