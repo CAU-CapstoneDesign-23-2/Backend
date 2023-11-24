@@ -22,6 +22,7 @@ public class ChatSaveRequestDto {
         return Chat.builder()
                 .type(type)
                 .content(content)
+                .users(users)
                 .build();
     }
 
