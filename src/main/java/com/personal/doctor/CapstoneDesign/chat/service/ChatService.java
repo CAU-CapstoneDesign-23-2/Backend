@@ -45,4 +45,9 @@ public class ChatService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public void deleteAll() {
+        chatRepository.deleteAll();
+    }
+
 }
