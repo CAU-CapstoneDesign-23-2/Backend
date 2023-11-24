@@ -86,10 +86,10 @@ public class ChatControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        Chat chat = chatRepository.findById(userId).get();
+        List<Chat> chats = chatRepository.findChatByUsersId(userId);
 
-        assertEquals(0L, chat.getType());
-        assertEquals("채팅 저장 api 테스트", chat.getContent());
+        assertEquals(0L, chats.get(0).getType());
+        assertEquals("채팅 저장 api 테스트", chats.get(0).getContent());
     }
 
     @Test
