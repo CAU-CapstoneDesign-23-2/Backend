@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.user.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.personal.doctor.CapstoneDesign.chat.domain.Chat;
 import com.personal.doctor.CapstoneDesign.community.domain.Posts;
 import com.personal.doctor.CapstoneDesign.userDetail.domain.Details;
 import jakarta.persistence.*;
@@ -37,12 +38,16 @@ public class Users {
     private String location;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
-    private List<Posts> posts = new ArrayList<>();
-
-    @JsonManagedReference
     @OneToOne
     private Details details;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "users")
+    private List<Chat> chats = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    private List<Posts> posts = new ArrayList<>();
 
     @Builder
     public Users(String userID, String userPassword, String userName, String location) {
@@ -68,6 +73,10 @@ public class Users {
 
     public void addPosts(Posts post) {
         this.posts.add(post);
+    }
+
+    public void addChats(Chat chat) {
+        this.chats.add(chat);
     }
 
     public void beforeDelete() {
