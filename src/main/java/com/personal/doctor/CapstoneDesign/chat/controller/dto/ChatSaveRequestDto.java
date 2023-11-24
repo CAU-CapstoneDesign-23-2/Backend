@@ -18,10 +18,10 @@ public class ChatSaveRequestDto {
         this.content = content;
     }
 
-    public Chat toEntity(ChatSaveRequestDto requestDto) {
+    public Chat toEntity() {
         return Chat.builder()
-                .type(requestDto.type)
-                .content(requestDto.content)
+                .type(type)
+                .content(content)
                 .build();
     }
 
