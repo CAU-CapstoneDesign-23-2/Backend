@@ -28,9 +28,10 @@ public class Chat {
     private Users users;
 
     @Builder
-    public Chat(Long type, String content) {
+    public Chat(Long type, String content, Users users) {
         this.type = type;
         this.content = content;
+        this.users = users;
     }
 
     public void setUsers(Users users) {
