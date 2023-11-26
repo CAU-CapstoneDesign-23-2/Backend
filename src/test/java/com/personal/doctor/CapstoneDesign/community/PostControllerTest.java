@@ -171,7 +171,7 @@ class PostControllerTest {
         MvcResult mvcResult = mockMvc.perform(
                         post("/post/search")
                                 .contentType(MediaType.TEXT_PLAIN)
-                                .content("que")
+                                .param("keyword","que")
                 )
                 .andDo(print())
                 .andExpect(status().isOk())

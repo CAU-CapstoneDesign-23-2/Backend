@@ -39,8 +39,8 @@ public class PostController {
     }
 
     // post 검색
-    @PostMapping(value = "/post/search", produces = "application/json;charset=UTF-8")
-    public List<PostListResponseDto> searchPost(@RequestBody String keyword) {
+    @GetMapping(value = "/post/search", produces = "application/json;charset=UTF-8")
+    public List<PostListResponseDto> searchPost(@RequestParam("keyword") String keyword) {
         return postService.search(keyword);
     }
 
