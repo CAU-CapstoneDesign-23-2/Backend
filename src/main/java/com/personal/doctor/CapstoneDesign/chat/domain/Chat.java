@@ -16,10 +16,10 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column             // 사용자의 질문이면 0,
-    private Long type;  // 생성형 AI의 답변이면 1
+    @Column(nullable = false)   // 사용자의 질문이면 0,
+    private Long type;          // 생성형 AI의 답변이면 1
 
-    @Column
+    @Column(length = 500, nullable = false)
     private String content;
 
     @JsonBackReference

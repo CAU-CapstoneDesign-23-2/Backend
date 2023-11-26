@@ -23,7 +23,7 @@ public class Posts {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column(length = 500, nullable = false)
     private String question;
 
     @Column
