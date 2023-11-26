@@ -150,7 +150,7 @@ class PostControllerTest {
         String content = new ObjectMapper().writeValueAsString(requestMap);
 
         MvcResult mvcResult = mockMvc.perform(
-                        post("/post/" + docID + "/" + postId)
+                        put("/post/" + docID + "/" + postId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
                 )
