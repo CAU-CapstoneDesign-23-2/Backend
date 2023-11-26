@@ -14,14 +14,14 @@ public class DetailController {
     private final DetailsService detailsService;
 
     // 세부정보 저장
-    @PostMapping("/detail/{userId}")
+    @PostMapping(value = "/detail/{userId}", produces = "application/json;charset=UTF-8")
     public Long save(@PathVariable Long userId,
                      @RequestBody DetailsSaveRequestDto requestDto) {
         return detailsService.save(userId, requestDto);
     }
 
     // 세부정보 수정
-    @PutMapping("/detail/{userId}")
+    @PutMapping(value = "/detail/{userId}", produces = "application/json;charset=UTF-8")
     public Long update(@PathVariable Long userId,
                        @RequestBody DetailsUpdateRequestDto requestDto) {
         return detailsService.update(userId, requestDto);
