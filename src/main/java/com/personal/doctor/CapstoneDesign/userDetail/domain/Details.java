@@ -53,8 +53,8 @@ public class Details {
     private String medicine;
 
     @JsonBackReference
-    @OneToOne(mappedBy = "details", orphanRemoval = true)
-    @JoinColumn(name = "user_id")
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "User_id")
     private Users users;
 
     @Builder

@@ -46,7 +46,7 @@ public class Users {
     private List<Chat> chats = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "users", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "users")
     private List<Posts> posts = new ArrayList<>();
 
     @Builder
