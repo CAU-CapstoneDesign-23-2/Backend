@@ -22,6 +22,10 @@ jobs:
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v3.1.5
+        env:
+          DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         with:
           arguments: build
 
@@ -48,3 +52,42 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/personal-health-companion:latest
+
+      - name: get GitHub IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+
+      # Configure AWS Credentials - AWS 접근 권한 취득(IAM)
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      # Add github ip to AWS
+      - name: Add GitHub IP to AWS
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
+      # AWS EC2 Server Connect & Docker 명령어 실행
+      - name: AWS EC2 Connection
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          port: 22
+          timeout: 60s
+          script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/personal-health-companion:latest
+            sudo docker stop $(docker ps -a -q)
+            sudo docker run -d --log-driver=syslog -p 8080:8080 -e DB_ENDPOINT=${{ secrets.DB_ENDPOINT }} -e DB_USERNAME=${{ secrets.DB_USERNAME }} -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} ${{ secrets.DOCKERHUB_USERNAME }}/personal-health-companion:latest
+            sudo docker rm $(docker ps --filter 'status=exited' -a -q)
+            sudo docker image prune -a -f
+
+      # REMOVE Github IP FROM security group
+      - name: Remove IP FROM security group
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
