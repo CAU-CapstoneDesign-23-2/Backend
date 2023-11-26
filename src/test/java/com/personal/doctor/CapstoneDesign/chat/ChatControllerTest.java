@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -109,7 +110,7 @@ public class ChatControllerTest {
         chatService.save(userId, requestDto2);
 
         MvcResult mvcResult = mockMvc.perform(
-                        post("/userChats/" + userId)
+                        get("/userChats/" + userId)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
