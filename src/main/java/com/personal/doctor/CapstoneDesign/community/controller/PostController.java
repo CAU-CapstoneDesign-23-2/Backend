@@ -31,7 +31,7 @@ public class PostController {
     }
 
     // post 답변
-    @PostMapping("/post/{userId}/{postId}")
+    @PutMapping("/post/{userId}/{postId}")
     public Long answerPost(@PathVariable Long userId,
                            @PathVariable Long postId,
                            @RequestBody PostAnsweredResponseDto responseDto) {
