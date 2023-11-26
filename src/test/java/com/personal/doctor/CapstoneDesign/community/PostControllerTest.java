@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -33,7 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -117,7 +118,7 @@ class PostControllerTest {
         String content = new ObjectMapper().writeValueAsString(requestMap);
 
         MvcResult mvcResult = mockMvc.perform(
-                        put("/post/update/" + postId)
+                        put("/post/" + postId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
                 )
@@ -149,7 +150,7 @@ class PostControllerTest {
         String content = new ObjectMapper().writeValueAsString(requestMap);
 
         MvcResult mvcResult = mockMvc.perform(
-                        post("/post/answer/" + docID + "/" + postId)
+                        post("/post/" + docID + "/" + postId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(content)
                 )
@@ -225,7 +226,7 @@ class PostControllerTest {
         postService.save(otherUser, anotherPost);
 
         MvcResult mvcResult = mockMvc.perform(
-                        get("/posts/user/" + userId)
+                        get("/posts/" + userId)
                 )
                 .andDo(print())
                 .andExpect(status().isOk())

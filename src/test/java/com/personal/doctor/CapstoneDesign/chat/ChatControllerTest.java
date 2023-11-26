@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -32,6 +33,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -114,7 +116,8 @@ public class ChatControllerTest {
                 .andReturn();
 
         String jsonResponse = mvcResult.getResponse().getContentAsString();
-        List<ChatRequestDto> chats = new ObjectMapper().readValue(jsonResponse, new TypeReference<List<ChatRequestDto>>(){});
+        List<ChatRequestDto> chats = new ObjectMapper().readValue(jsonResponse, new TypeReference<List<ChatRequestDto>>() {
+        });
 
         assertEquals(2, chats.size());
         assertEquals(0L, chats.get(0).getType());

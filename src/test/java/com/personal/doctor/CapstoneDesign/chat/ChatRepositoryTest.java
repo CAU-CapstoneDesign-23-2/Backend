@@ -1,19 +1,18 @@
 package com.personal.doctor.CapstoneDesign.chat;
 
-import com.personal.doctor.CapstoneDesign.chat.controller.dto.ChatSaveRequestDto;
 import com.personal.doctor.CapstoneDesign.chat.domain.Chat;
 import com.personal.doctor.CapstoneDesign.chat.domain.ChatRepository;
-import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
-import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ChatRepositoryTest {
