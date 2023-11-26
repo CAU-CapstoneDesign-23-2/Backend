@@ -169,7 +169,7 @@ class PostControllerTest {
     @Test
     public void 게시물_검색() throws Exception {
         MvcResult mvcResult = mockMvc.perform(
-                        post("/post/search")
+                        get("/post/search")
                                 .contentType(MediaType.TEXT_PLAIN)
                                 .param("keyword","que")
                 )
