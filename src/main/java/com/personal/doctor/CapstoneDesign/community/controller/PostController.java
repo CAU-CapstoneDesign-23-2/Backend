@@ -24,14 +24,14 @@ public class PostController {
     }
 
     // post 수정
-    @PutMapping("/post/update/{postId}")
+    @PutMapping("/post/{postId}")
     public Long updatePost(@PathVariable Long postId,
                            @RequestBody PostUpdateRequestDto requestDto) {
         return postService.update(postId, requestDto);
     }
 
     // post 답변
-    @PostMapping("/post/answer/{userId}/{postId}")
+    @PostMapping("/post/{userId}/{postId}")
     public Long answerPost(@PathVariable Long userId,
                            @PathVariable Long postId,
                            @RequestBody PostAnsweredResponseDto responseDto) {
@@ -51,7 +51,7 @@ public class PostController {
     }
 
     // userId가 id인 사용자의 게시물 반환
-    @GetMapping(value = "/posts/user/{userId}", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/posts/{userId}", produces = "application/json;charset=UTF-8")
     public List<PostListResponseDto> userPosts(@PathVariable Long userId) {
         return postService.findById(userId);
     }
