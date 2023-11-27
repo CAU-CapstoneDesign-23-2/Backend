@@ -11,8 +11,9 @@ import java.util.List;
 public interface HospitalRepository extends JpaRepository<Hospital, Long> {
 
     // 내과, 성형외과 등을 찾을 때 병원 이름에 포함되어 있는 경우
-    @Query("SELECT h FROM Hospital h WHERE h.name LIKE %:type% ORDER BY h.id DESC")
-    List<Hospital> findHospitalsByName(@Param("type") String type);
+    @Query("SELECT h FROM Hospital h WHERE (h.name LIKE %:type%) AND (h.city LIKE %:city%) ORDER BY h.id DESC")
+    List<Hospital> findHospitalsByName(@Param("city") String city,
+                                       @Param("type") String type);
 
     // 사용자가 입력한 위치를 바탕으로 병원 정보 찾기
     @Query("SELECT h FROM Hospital h WHERE (h.city = :city) AND (h.district = :district OR :district IS NULL) AND (h.town = :town OR :town IS NULL) ORDER BY h.id DESC")
