@@ -8,20 +8,20 @@ import lombok.Getter;
 @Getter
 public class ChatSaveRequestDto {
 
-    private Long type;
-    private String content;
+    private String requestText;
+    private String responseText;
     private Users users;
 
     @Builder
-    public ChatSaveRequestDto(Long type, String content) {
-        this.type = type;
-        this.content = content;
+    public ChatSaveRequestDto(String requestText, String responseText) {
+        this.requestText = requestText;
+        this.responseText = responseText;
     }
 
     public Chat toEntity() {
         return Chat.builder()
-                .type(type)
-                .content(content)
+                .requestText(requestText)
+                .responseText(responseText)
                 .users(users)
                 .build();
     }

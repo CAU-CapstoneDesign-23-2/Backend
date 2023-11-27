@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 public class ChatRequestDto {
 
     private Long id;
-    private Long type;
-    private String content;
+    private String requestText;
+    private String responseText;
     private Users users;
 
     public ChatRequestDto(Chat entity) {
         id = entity.getId();
-        type = entity.getType();
-        content = entity.getContent();
+        requestText = entity.getRequestText();
+        responseText = entity.getResponseText();
         users = entity.getUsers();
     }
 
