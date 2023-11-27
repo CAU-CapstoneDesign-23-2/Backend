@@ -28,7 +28,7 @@ public class HospitalService {
         Users users = usersRepository.findById(userID)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
 
-        return hospitalRepository.findHospitalsByName(users.getLocation(), type).stream()
+        return hospitalRepository.findHospitalsByName(users.getLocation().trim(), type).stream()
                 .map(HospitalListResponseDto::new)
                 .collect(Collectors.toList());
     }
