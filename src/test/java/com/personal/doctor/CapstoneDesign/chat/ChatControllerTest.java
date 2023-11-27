@@ -77,8 +77,8 @@ public class ChatControllerTest {
     @Test
     public void 채팅_저장() throws Exception {
         Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("type", 0L);
-        requestMap.put("content", "채팅 저장 api 테스트");
+        requestMap.put("requestText", "채팅 저장 api 테스트");
+        requestMap.put("responseText", "채팅 저장 api 테스트");
         String content = new ObjectMapper().writeValueAsString(requestMap);
 
         mockMvc.perform(
@@ -91,21 +91,21 @@ public class ChatControllerTest {
 
         List<Chat> chats = chatRepository.findChatByUsersId(userId);
 
-        assertEquals(0L, chats.get(0).getType());
-        assertEquals("채팅 저장 api 테스트", chats.get(0).getContent());
+        assertEquals("채팅 저장 api 테스트", chats.get(0).getRequestText());
+        assertEquals("채팅 저장 api 테스트", chats.get(0).getResponseText());
     }
 
     @Test
     public void 채팅_반환() throws Exception {
 
         ChatSaveRequestDto requestDto1 = ChatSaveRequestDto.builder()
-                .type(0L)
-                .content("40세 남자인데 무릎이 너무 아파. 어떻게 해야할까?")
+                .requestText("40세 남자인데 무릎이 너무 아파. 어떻게 해야할까?")
+                .responseText("Bard 대답")
                 .build();
         chatService.save(userId, requestDto1);
         ChatSaveRequestDto requestDto2 = ChatSaveRequestDto.builder()
-                .type(0L)
-                .content("72 여자인데 배가 너무 아파. 어떻게 해야할까?")
+                .requestText("72 여자인데 배가 너무 아파. 어떻게 해야할까?")
+                .responseText("Bard 대답")
                 .build();
         chatService.save(userId, requestDto2);
 
@@ -121,10 +121,10 @@ public class ChatControllerTest {
         });
 
         assertEquals(2, chats.size());
-        assertEquals(0L, chats.get(0).getType());
-        assertEquals("40세 남자인데 무릎이 너무 아파. 어떻게 해야할까?", chats.get(0).getContent());
-        assertEquals(0L, chats.get(1).getType());
-        assertEquals("72 여자인데 배가 너무 아파. 어떻게 해야할까?", chats.get(1).getContent());
+        assertEquals("40세 남자인데 무릎이 너무 아파. 어떻게 해야할까?", chats.get(0).getRequestText());
+        assertEquals("Bard 대답", chats.get(0).getResponseText());
+        assertEquals("72 여자인데 배가 너무 아파. 어떻게 해야할까?", chats.get(1).getRequestText());
+        assertEquals("Bard 대답", chats.get(1).getResponseText());
     }
 
 }

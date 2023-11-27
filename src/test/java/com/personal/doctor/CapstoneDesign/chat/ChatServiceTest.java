@@ -50,8 +50,8 @@ public class ChatServiceTest {
     @Test
     public void 채팅_저장() {
         ChatSaveRequestDto chatSaveRequestDto = ChatSaveRequestDto.builder()
-                .type(0L)
-                .content("40세 남자인데 무릎이 너무 아파. 어떻게 해야할까?")
+                .requestText("40세 남자인데 무릎이 너무 아파. 어떻게 해야할까?")
+                .responseText("Bard 대답")
                 .build();
         Long chatId = chatService.save(userId, chatSaveRequestDto);
 

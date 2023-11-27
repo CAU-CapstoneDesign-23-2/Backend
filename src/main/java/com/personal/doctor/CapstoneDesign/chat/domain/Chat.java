@@ -16,11 +16,11 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)   // 사용자의 질문이면 0,
-    private Long type;          // 생성형 AI의 답변이면 1
+    @Column(length = 2000, nullable = false)    // 사용자 질문
+    private String requestText;
 
-    @Column(length = 500, nullable = false)
-    private String content;
+    @Column(length = 2000, nullable = false)    // Bard 대답
+    private String responseText;
 
     @JsonBackReference
     @ManyToOne
@@ -28,9 +28,9 @@ public class Chat {
     private Users users;
 
     @Builder
-    public Chat(Long type, String content, Users users) {
-        this.type = type;
-        this.content = content;
+    public Chat(String requestText, String responseText, Users users) {
+        this.requestText = requestText;
+        this.responseText = responseText;
         this.users = users;
     }
 
