@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.user;
 
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.user.controller.dto.UserLoginRequestDto;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
@@ -49,8 +50,12 @@ class UserServiceTest {
                 .userID("ID")
                 .userPassword("PW")
                 .build();
+        UserLoginRequestDto loginRequestDto = UserLoginRequestDto.builder()
+                .userID("ID")
+                .userPassword("PW")
+                .build();
         Long joinUserId = userService.join(joinRequestDto);
-        Long loginUserId = userService.login(joinRequestDto);
+        Long loginUserId = userService.login(loginRequestDto);
 
         assertEquals(joinUserId, loginUserId);
     }

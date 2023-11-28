@@ -1,5 +1,6 @@
 package com.personal.doctor.CapstoneDesign.user.service;
 
+import com.personal.doctor.CapstoneDesign.user.controller.dto.UserLoginRequestDto;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserAlreadyExistException;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserLoginFailureException;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotExistException;
@@ -37,7 +38,7 @@ public class UserService {
 
     // 사용자 로그인
     @Transactional
-    public Long login(UserJoinRequestDto requestDto) {
+    public Long login(UserLoginRequestDto requestDto) {
         Optional<Users> users = usersRepository.findByUserID(requestDto.getUserID());
         if (users.isEmpty()) {
             throw new UserLoginFailureException("로그인 실패");

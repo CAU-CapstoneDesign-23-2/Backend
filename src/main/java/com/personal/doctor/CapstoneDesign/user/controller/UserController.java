@@ -1,6 +1,7 @@
 package com.personal.doctor.CapstoneDesign.user.controller;
 
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserJoinRequestDto;
+import com.personal.doctor.CapstoneDesign.user.controller.dto.UserLoginRequestDto;
 import com.personal.doctor.CapstoneDesign.user.controller.dto.UserUpdateRequestDto;
 import com.personal.doctor.CapstoneDesign.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class UserController {
 
     // 사용자 로그인
     @PostMapping("/login")
-    public Long login(@RequestBody UserJoinRequestDto requestDto) {
+    public Long login(@RequestBody UserLoginRequestDto requestDto) {
         return userService.login(requestDto);
     }
 
