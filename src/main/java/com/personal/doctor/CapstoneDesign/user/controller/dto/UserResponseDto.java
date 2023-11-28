@@ -11,6 +11,7 @@ public class UserResponseDto {
     private String userPassword;
     private Role role;
     private String userName;
+    private String location;
 
     public UserResponseDto(Users entity) {
         this.id = entity.getId();
@@ -18,5 +19,6 @@ public class UserResponseDto {
         this.userPassword = entity.getUserPassword();
         this.role = entity.getRole();
         this.userName = entity.getUserName();
+        this.location = entity.getLocation();
     }
 }

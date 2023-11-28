@@ -28,6 +28,8 @@ public class UserService {
         Users user = Users.builder()
                 .userID(requestDto.getUserID())
                 .userPassword(requestDto.getUserPassword())
+                .userName(requestDto.getUserName())
+                .location(requestDto.getLocation())
                 .build();
         usersRepository.save(user);
         return user.getId();
@@ -66,7 +68,7 @@ public class UserService {
         }
     }
 
-    // 사용자 이름 수정
+    // 사용자 정보(이름, 거주지) 수정
     @Transactional
     public Long update(Long userId, UserUpdateRequestDto requestDto) {
         Users user = usersRepository.findById(userId)
