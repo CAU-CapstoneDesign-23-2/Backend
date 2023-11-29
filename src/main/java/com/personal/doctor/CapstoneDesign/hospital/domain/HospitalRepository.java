@@ -20,7 +20,7 @@ public interface HospitalRepository extends JpaRepository<Hospital, Long> {
     List<Hospital> findHospitalByAddress(@Param("location") String location);
 
     // 사용자가 입력한 위치를 바탕으로 병원 정보 찾기 메인에 노출할 1개 반환
-    @Query("SELECT h FROM Hospital h WHERE h.district = :location")
-    Hospital findOneHospitalByAddress(@Param("location") String location);
+    @Query("SELECT h FROM Hospital h WHERE h.district = :location ORDER BY h.id ASC")
+    List<Hospital> findHospitalsByAddress(@Param("location") String location);
 
 }

@@ -52,7 +52,7 @@ public class HospitalService {
         Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
 
-        return new HospitalListResponseDto(hospitalRepository.findOneHospitalByAddress(users.getLocation()));
+        return new HospitalListResponseDto(hospitalRepository.findHospitalsByAddress(users.getLocation()).get(0));
     }
 
 
