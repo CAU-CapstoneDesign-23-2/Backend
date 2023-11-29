@@ -25,8 +25,8 @@ public class HospitalController {
 
     // 사용자가 입력한 주소에 있는 병원들 반환
     @GetMapping(value = "/hospital/address/{userID}", produces = "application/json;charset=UTF-8")
-    public List<HospitalListResponseDto> withAddress(@PathVariable Long userId) {
-        return hospitalService.findHospitalAddress(userId);
+    public List<HospitalListResponseDto> withAddress(@PathVariable Long userID) {
+        return hospitalService.findHospitalAddress(userID);
     }
 
     // 메인 화면에 노출할 사용자 거주지 주변 병원 한 개 반환
