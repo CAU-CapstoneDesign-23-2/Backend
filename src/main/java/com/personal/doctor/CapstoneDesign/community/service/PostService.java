@@ -92,6 +92,14 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    // 카테고리별 Post 반환
+    @Transactional
+    public List<PostListResponseDto> findByCategory(String category) {
+        return postsRepository.findPostsByCategory(category).stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void deleteAll() {
         postsRepository.deleteAll();

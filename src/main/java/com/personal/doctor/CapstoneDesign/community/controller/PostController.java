@@ -55,4 +55,10 @@ public class PostController {
     public List<PostListResponseDto> userPosts(@PathVariable Long userId) {
         return postService.findById(userId);
     }
+
+    // 카테고리별 Post 반환
+    @GetMapping(value = "/post", produces = "application/json;charset=UTF-8")
+    public List<PostListResponseDto> findByCategory(@RequestParam String category) {
+        return postService.findByCategory(category);
+    }
 }

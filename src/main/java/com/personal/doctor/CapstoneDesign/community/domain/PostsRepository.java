@@ -21,4 +21,7 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
 
     @Query("SELECT p FROM Posts p WHERE p.users.id = :id ORDER BY p.id DESC ")
     List<Posts> findAllUserPosts(@Param("id") Long userId);
+
+    @Query("SELECT p FROM Posts p WHERE p.category = :category ORDER BY p.id DESC")
+    List<Posts> findPostsByCategory(@Param("category") String category);
 }
