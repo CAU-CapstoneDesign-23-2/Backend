@@ -21,7 +21,7 @@ public class UserController {
     }
 
     // 사용자 로그인
-    @PostMapping("/login")
+    @PostMapping(value = "/login", produces = "application/json;charset=UTF-8")
     public UserResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
         return userService.login(requestDto);
     }
