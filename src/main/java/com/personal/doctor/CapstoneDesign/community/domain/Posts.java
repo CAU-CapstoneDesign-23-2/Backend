@@ -55,7 +55,7 @@ public class Posts {
         this.answer = answer;
     }
 
-    public void setUser(Users users) {
+    public void setUsers(Users users) {
         this.users = users;
     }
 

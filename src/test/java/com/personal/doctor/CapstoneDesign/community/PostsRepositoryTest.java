@@ -47,7 +47,7 @@ class PostsRepositoryTest {
                 .question("question")
                 .build();
         users.addPosts(posts);
-        posts.setUser(users);
+        posts.setUsers(users);
         postsRepository.save(posts);
 
         assertEquals(posts.getUsers().getId(), users.getId());

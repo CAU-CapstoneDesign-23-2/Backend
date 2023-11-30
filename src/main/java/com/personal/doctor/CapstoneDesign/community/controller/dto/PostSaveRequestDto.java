@@ -12,7 +12,6 @@ public class PostSaveRequestDto {
     private String category;
     private String title;
     private String question;
-    private Users users;
 
     @Builder
     public PostSaveRequestDto(String category, String title, String question) {
@@ -26,12 +25,7 @@ public class PostSaveRequestDto {
                 .category(category)
                 .title(title)
                 .question(question)
-                .users(users)
                 .build();
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
     }
 
 }

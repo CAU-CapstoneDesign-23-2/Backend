@@ -11,6 +11,7 @@ import com.personal.doctor.CapstoneDesign.community.domain.PostsRepository;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import com.personal.doctor.CapstoneDesign.util.exceptions.UserNotQualifiedException;
+import org.springframework.cglib.core.SpringNamingPolicy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,12 +32,12 @@ public class PostService {
     // Post 저장
     @Transactional
     public Long save(Long userId, PostSaveRequestDto requestDto) {
-        Users user = usersRepository.findById(userId)
+        Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("존재하지 않는 사용자입니다."));
-        requestDto.setUsers(user);
-        Posts post = requestDto.toEntity();
 
-        user.addPosts(post);
+        Posts post = requestDto.toEntity();
+        post.setUsers(users);
+        users.addPosts(post);
         postsRepository.save(post);
 
         return post.getId();

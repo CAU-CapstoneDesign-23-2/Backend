@@ -81,7 +81,7 @@ public class Users {
 
     public void beforeDelete() {
         for (Posts post : posts) {
-            post.setUser(null);
+            post.setUsers(null);
         }
     }
 }
