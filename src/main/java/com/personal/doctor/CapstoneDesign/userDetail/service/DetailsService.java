@@ -23,10 +23,10 @@ public class DetailsService {
     public Long save(Long userId, DetailsSaveRequestDto requestDto) {
         Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
-        requestDto.setUsers(users);
         Details details = requestDto.toEntity();
-        detailsRepository.save(details);
+        details.setUsers(users);
         users.updateDetails(details);
+        detailsRepository.save(details);
 
         return details.getId();
     }

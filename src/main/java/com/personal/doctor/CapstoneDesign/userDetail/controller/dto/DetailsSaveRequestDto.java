@@ -20,7 +20,6 @@ public class DetailsSaveRequestDto {
     private String hobby2;
     private String hobby3;
     private String medicine;
-    private Users users;
 
     @Builder
     public DetailsSaveRequestDto(String age, String gender, String disease1, String disease2, String disease3,
@@ -49,12 +48,7 @@ public class DetailsSaveRequestDto {
                 .hobby2(hobby2)
                 .hobby3(hobby3)
                 .medicine(medicine)
-                .users(users)
                 .build();
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
     }
 
 }
