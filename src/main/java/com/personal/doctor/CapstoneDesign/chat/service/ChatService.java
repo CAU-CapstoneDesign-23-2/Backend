@@ -30,9 +30,8 @@ public class ChatService {
         Users users = usersRepository.findById(userId)
                 .orElseThrow(() -> new UserNotExistException("사용자가 존재하지 않습니다."));
 
-        chatSaveRequestDto.setUsers(users);
         Chat chat = chatSaveRequestDto.toEntity();
-
+        chat.setUsers(users);
         users.addChats(chat);
         chatRepository.save(chat);
 

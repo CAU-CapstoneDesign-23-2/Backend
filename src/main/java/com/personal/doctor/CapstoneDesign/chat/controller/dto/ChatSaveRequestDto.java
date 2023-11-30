@@ -10,7 +10,6 @@ public class ChatSaveRequestDto {
 
     private String requestText;
     private String responseText;
-    private Users users;
 
     @Builder
     public ChatSaveRequestDto(String requestText, String responseText) {
@@ -22,12 +21,7 @@ public class ChatSaveRequestDto {
         return Chat.builder()
                 .requestText(requestText)
                 .responseText(responseText)
-                .users(users)
                 .build();
-    }
-
-    public void setUsers(Users users) {
-        this.users = users;
     }
 
 }
