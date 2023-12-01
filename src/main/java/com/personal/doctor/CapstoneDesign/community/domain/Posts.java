@@ -1,7 +1,6 @@
 package com.personal.doctor.CapstoneDesign.community.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.personal.doctor.CapstoneDesign.user.domain.Users;
 import jakarta.persistence.*;
 import lombok.Builder;
