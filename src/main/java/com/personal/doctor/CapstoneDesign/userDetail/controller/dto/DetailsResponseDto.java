@@ -20,6 +20,7 @@ public class DetailsResponseDto {
     private String hobby2;
     private String hobby3;
     private String medicine;
+    private String job;
     private Users users;
 
     public DetailsResponseDto(Details entity) {
@@ -34,6 +35,7 @@ public class DetailsResponseDto {
         this.hobby2 = entity.getHobby2();
         this.hobby3 = entity.getHobby3();
         this.medicine = entity.getMedicine();
+        this.job = entity.getJob();
         this.users = entity.getUsers();
     }
 

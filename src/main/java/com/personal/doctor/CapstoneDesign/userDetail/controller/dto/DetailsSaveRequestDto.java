@@ -20,10 +20,11 @@ public class DetailsSaveRequestDto {
     private String hobby2;
     private String hobby3;
     private String medicine;
+    private String job;
 
     @Builder
     public DetailsSaveRequestDto(String age, String gender, String disease1, String disease2, String disease3,
-                                 String surgery, String hobby1, String hobby2, String hobby3, String medicine) {
+                                 String surgery, String hobby1, String hobby2, String hobby3, String medicine, String job) {
         this.age = age;
         this.gender = gender;
         this.disease1 = disease1;
@@ -34,6 +35,7 @@ public class DetailsSaveRequestDto {
         this.hobby2 = hobby2;
         this.hobby3 = hobby3;
         this.medicine = medicine;
+        this.job = job;
     }
 
     public Details toEntity() {
@@ -48,6 +50,7 @@ public class DetailsSaveRequestDto {
                 .hobby2(hobby2)
                 .hobby3(hobby3)
                 .medicine(medicine)
+                .job(job)
                 .build();
     }
 

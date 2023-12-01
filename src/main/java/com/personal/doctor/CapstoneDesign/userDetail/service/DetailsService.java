@@ -45,6 +45,7 @@ public class DetailsService {
         userDetails.setHobby2(requestDto.getHobby2());
         userDetails.setHobby3(requestDto.getHobby3());
         userDetails.setMedicine(requestDto.getMedicine());
+        userDetails.setJob(requestDto.getJob());
 
         return userDetails.getId();
     }

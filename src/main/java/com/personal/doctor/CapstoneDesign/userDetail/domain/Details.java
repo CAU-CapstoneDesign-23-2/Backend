@@ -48,6 +48,10 @@ public class Details {
     @Column
     private String hobby3;
 
+    // 사용자 직업 저장
+    @Column
+    private String job;
+
     // 복용중인 약
     @Column
     private String medicine;
@@ -59,7 +63,7 @@ public class Details {
 
     @Builder
     public Details(String age, String gender, String disease1, String disease2, String disease3,
-                   String surgery, String hobby1, String hobby2, String hobby3, String medicine, Users users) {
+                   String surgery, String hobby1, String hobby2, String hobby3, String medicine, String job, Users users) {
         this.age = age;
         this.gender = gender;
         this.disease1 = disease1;
@@ -70,6 +74,7 @@ public class Details {
         this.hobby2 = hobby2;
         this.hobby3 = hobby3;
         this.medicine = medicine;
+        this.job = job;
         this.users = users;
     }
 
