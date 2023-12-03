@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface HospitalRepository extends JpaRepository<Hospital, Long> {
 
-    // 내과, 성형외과 등을 찾을 때 병원 이름에 포함되어 있는 경우
-    @Query("SELECT h FROM Hospital h WHERE (h.name LIKE %:type%) AND ((h.city LIKE %:location%) OR (h.district LIKE %:location%)) ORDER BY h.id DESC")
+    // 내과, 성형외과 등을 찾을 때 병원 이름 또는 병원코드에 포함되어 있는 경우
+    @Query("SELECT h FROM Hospital h WHERE (h.district = :location) AND ((h.code LIKE %:type%) OR (h.name LIKE %:type%)) ORDER BY h.id ASC")
     List<Hospital> findHospitalsByName(@Param("location") String location,
                                        @Param("type") String type);
 
