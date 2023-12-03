@@ -101,6 +101,14 @@ public class PostService {
                 .collect(Collectors.toList());
     }
 
+    // 카테고리에서의 검색
+    @Transactional
+    public List<PostListResponseDto> findCategoryByKeyword(String category, String keyword) {
+        return postsRepository.findPostsCategoryByKeyword(category, keyword).stream()
+                .map(PostListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void deleteAll() {
         postsRepository.deleteAll();
