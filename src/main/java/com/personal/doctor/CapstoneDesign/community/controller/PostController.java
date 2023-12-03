@@ -64,8 +64,8 @@ public class PostController {
 
     // 카테고리에서의 검색
     @GetMapping(value = "/category", produces = "application/json;charset=UTF-8")
-    public List<PostListResponseDto> findPostsInCategory(@RequestParam String category,
-                                                         @RequestParam String keyword) {
+    public List<PostListResponseDto> findPostsInCategory(@RequestParam("category") String category,
+                                                         @RequestParam("keyword") String keyword) {
         return postService.findCategoryByKeyword(category, keyword);
     }
 }
