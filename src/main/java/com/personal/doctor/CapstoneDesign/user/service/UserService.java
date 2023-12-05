@@ -12,6 +12,7 @@ import com.personal.doctor.CapstoneDesign.user.domain.UsersRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -45,6 +46,23 @@ public class UserService {
             throw new UserLoginFailureException("로그인 실패");
         } else {
             if (!users.get().getUserPassword().equals(requestDto.getUserPassword())) {
+                throw new UserLoginFailureException("로그인 실패");
+            }
+        }
+        return new UserResponseDto(users.get());
+    }
+
+    // 관리자 로그인
+    @Transactional
+    public UserResponseDto adminLogin(UserLoginRequestDto requestDto) {
+        Optional<Users> users = usersRepository.findByUserID(requestDto.getUserID());
+        if (users.isEmpty()) {
+            throw new UserLoginFailureException("로그인 실패");
+        } else {
+            if (!users.get().getUserPassword().equals(requestDto.getUserPassword())) {
+                throw new UserLoginFailureException("로그인 실패");
+            }
+            if (!Objects.equals(users.get().getRole().toString(), "ADMIN")) {
                 throw new UserLoginFailureException("로그인 실패");
             }
         }

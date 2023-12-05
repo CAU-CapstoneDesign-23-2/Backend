@@ -26,6 +26,12 @@ public class UserController {
         return userService.login(requestDto);
     }
 
+    // 관리자 로그인
+    @PostMapping(value = "/admin", produces = "application/json;charset=UTF-8")
+    public UserResponseDto adminLogin(@RequestBody UserLoginRequestDto requestDto) {
+        return userService.adminLogin(requestDto);
+    }
+
     // 사용자 탈퇴
     @DeleteMapping("/user/{userId}")
     public Long delete(@PathVariable Long userId) {
