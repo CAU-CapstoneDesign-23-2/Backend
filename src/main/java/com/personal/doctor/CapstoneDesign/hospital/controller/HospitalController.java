@@ -20,18 +20,21 @@ public class HospitalController {
     @GetMapping(value = "/hospital/name/{userID}", produces = "application/json;charset=UTF-8")
     public List<HospitalListResponseDto> withName(@PathVariable Long userID,
                                                   @RequestParam("type") String type) {
+        System.out.println("Hospital Search Controller is Accessed.");
         return hospitalService.findHospitalType(userID, type);
     }
 
     // 사용자가 입력한 주소에 있는 병원들 반환
     @GetMapping(value = "/hospital/address/{userID}", produces = "application/json;charset=UTF-8")
     public List<HospitalListResponseDto> withAddress(@PathVariable Long userID) {
+        System.out.println("Hospital Return Controller is Accessed.");
         return hospitalService.findHospitalAddress(userID);
     }
 
     // 메인 화면에 노출할 사용자 거주지 주변 병원 한 개 반환
     @GetMapping(value = "/hospital/main/{userID}", produces = "application/json;charset=UTF-8")
     public HospitalListResponseDto onMain(@PathVariable Long userID) {
+        System.out.println("Hospital for Main Page Controller is Accessed.");
         return hospitalService.findOneHospitalByAddress(userID);
     }
 
