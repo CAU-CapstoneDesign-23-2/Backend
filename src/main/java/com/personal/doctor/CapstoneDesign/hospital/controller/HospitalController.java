@@ -24,6 +24,7 @@ public class HospitalController {
     }
 
     // 사용자가 입력한 주소에 있는 병원들 반환
+    @Cacheable(value = "userHospitals", key = "#userID + '_' + 'Hospitals'")
     @GetMapping(value = "/hospital/address/{userID}", produces = "application/json;charset=UTF-8")
     public List<HospitalListResponseDto> withAddress(@PathVariable Long userID) {
         return hospitalService.findHospitalAddress(userID);
