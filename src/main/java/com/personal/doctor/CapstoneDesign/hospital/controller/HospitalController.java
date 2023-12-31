@@ -1,7 +1,6 @@
 package com.personal.doctor.CapstoneDesign.hospital.controller;
 
 import com.personal.doctor.CapstoneDesign.hospital.controller.dto.HospitalListResponseDto;
-import com.personal.doctor.CapstoneDesign.hospital.controller.dto.HospitalResponseDto;
 import com.personal.doctor.CapstoneDesign.hospital.service.HospitalService;
 import org.springframework.web.bind.annotation.*;
 
