@@ -1,8 +1,8 @@
 package com.personal.doctor.CapstoneDesign.hospital.controller;
 
 import com.personal.doctor.CapstoneDesign.hospital.controller.dto.HospitalListResponseDto;
-import com.personal.doctor.CapstoneDesign.hospital.controller.dto.HospitalResponseDto;
 import com.personal.doctor.CapstoneDesign.hospital.service.HospitalService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +32,7 @@ public class HospitalController {
     }
 
     // 메인 화면에 노출할 사용자 거주지 주변 병원 한 개 반환
+    @Cacheable(value = "userHospital", key = "#userID + '_' + 'Hospital'")
     @GetMapping(value = "/hospital/main/{userID}", produces = "application/json;charset=UTF-8")
     public HospitalListResponseDto onMain(@PathVariable Long userID) {
         System.out.println("Hospital for Main Page Controller is Accessed.");
