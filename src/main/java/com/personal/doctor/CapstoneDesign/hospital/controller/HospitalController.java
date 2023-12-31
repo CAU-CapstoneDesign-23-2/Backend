@@ -34,7 +34,9 @@ public class HospitalController {
     @Cacheable(value = "userHospital", key = "#userID + '_' + 'Hospital'")
     @GetMapping(value = "/hospital/main/{userID}", produces = "application/json;charset=UTF-8")
     public HospitalListResponseDto onMain(@PathVariable Long userID) {
-        return hospitalService.findOneHospitalByAddress(userID);
+        HospitalListResponseDto result = hospitalService.findOneHospitalByAddress(userID);
+        System.out.println("Cache Not Used: " + result);
+        return result;
     }
 
 }
