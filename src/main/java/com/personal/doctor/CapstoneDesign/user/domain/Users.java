@@ -19,6 +19,7 @@ public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "users_id")
     private Long id;
 
     @Column(nullable = false)
@@ -37,15 +38,12 @@ public class Users {
     @Column
     private String location;
 
-    @JsonManagedReference
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Details details;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     private List<Chat> chats = new ArrayList<>();
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     private List<Posts> posts = new ArrayList<>();
 
