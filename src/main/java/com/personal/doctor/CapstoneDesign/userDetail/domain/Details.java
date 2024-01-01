@@ -25,8 +25,7 @@ public class Details {
     @Column(nullable = false)
     private String gender;
 
-    // 앓은 적이 있거나 앓고 있는 질병 최대 3개 선택하여 저장
-    @Column
+    @Column // 앓은 적이 있거나 앓고 있는 질병 최대 3개 선택하여 저장
     private String disease1;
 
     @Column
@@ -35,12 +34,10 @@ public class Details {
     @Column
     private String disease3;
 
-    // 수술 이력
-    @Column
+    @Column // 수술 이력
     private String surgery;
 
-    // 최근에 하고 있는 격렬한 활동 최대 3개 선택하여 저장
-    @Column
+    @Column // 최근에 하고 있는 격렬한 활동 최대 3개 선택하여 저장
     private String hobby1;
 
     @Column
@@ -49,12 +46,10 @@ public class Details {
     @Column
     private String hobby3;
 
-    // 사용자 직업 저장
-    @Column
+    @Column // 사용자 직업 저장
     private String job;
 
-    // 복용중인 약
-    @Column
+    @Column // 복용중인 약
     private String medicine;
 
     @OneToOne(fetch = FetchType.LAZY)
