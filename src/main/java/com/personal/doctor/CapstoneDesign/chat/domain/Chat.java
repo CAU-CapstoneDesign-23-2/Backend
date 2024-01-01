@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Chat {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chat_id")
     private Long id;
 
@@ -22,7 +23,6 @@ public class Chat {
     @Column(length = 2000, nullable = false)    // Bard 대답
     private String responseText;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private Users users;
