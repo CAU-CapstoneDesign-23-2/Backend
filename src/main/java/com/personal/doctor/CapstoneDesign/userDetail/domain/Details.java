@@ -16,6 +16,7 @@ public class Details {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "details_id")
     private Long id;
 
     @Column(nullable = false)
@@ -56,9 +57,8 @@ public class Details {
     @Column
     private String medicine;
 
-    @JsonBackReference
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "User_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private Users users;
 
     @Builder
