@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Chat {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "chat_id")
     private Long id;
 
     @Column(length = 2000, nullable = false)    // 사용자 질문
@@ -23,8 +23,8 @@ public class Chat {
     private String responseText;
 
     @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name = "Users_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
     private Users users;
 
     @Builder
