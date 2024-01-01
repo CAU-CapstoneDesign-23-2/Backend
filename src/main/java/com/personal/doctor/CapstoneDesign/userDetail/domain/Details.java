@@ -57,9 +57,8 @@ public class Details {
     @Column
     private String medicine;
 
-    @JsonBackReference
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "users_id")
     private Users users;
 
     @Builder

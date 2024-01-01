@@ -34,8 +34,8 @@ public class UserService {
                 .userName(requestDto.getUserName())
                 .location(requestDto.getLocation())
                 .build();
-        usersRepository.save(user);
-        return user.getId();
+
+        return usersRepository.save(user).getId();
     }
 
     // 사용자 로그인

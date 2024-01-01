@@ -38,16 +38,13 @@ public class Users {
     @Column
     private String location;
 
-    @JsonManagedReference
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private Details details;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chat> chats = new ArrayList<>();
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Posts> posts = new ArrayList<>();
 
     @Builder

@@ -32,7 +32,6 @@ public class Posts {
     @Column
     private String answer;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private Users users;

@@ -22,6 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.HashMap;
@@ -38,6 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class ChatControllerTest {
 
     @Autowired
@@ -55,12 +57,6 @@ public class ChatControllerTest {
     @Autowired
     private ChatService chatService;
 
-    @AfterEach
-    public void clean() {
-        chatService.deleteAll();
-        userService.deleteAll();
-    }
-
     private static Long userId;
 
     @BeforeEach
@@ -72,6 +68,12 @@ public class ChatControllerTest {
                 .userPassword("PW")
                 .build();
         userId = userService.join(userJoinRequestDto);
+    }
+
+    @AfterEach
+    public void clean() {
+        chatService.deleteAll();
+        userService.deleteAll();
     }
 
     @Test
