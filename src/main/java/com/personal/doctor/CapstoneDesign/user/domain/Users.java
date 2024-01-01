@@ -38,12 +38,15 @@ public class Users {
     @Column
     private String location;
 
+    @JsonManagedReference
     @OneToOne(fetch = FetchType.LAZY)
     private Details details;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     private List<Chat> chats = new ArrayList<>();
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "users")
     private List<Posts> posts = new ArrayList<>();
 
