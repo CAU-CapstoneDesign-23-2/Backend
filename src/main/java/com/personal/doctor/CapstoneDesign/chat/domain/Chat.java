@@ -23,6 +23,7 @@ public class Chat {
     @Column(length = 2000, nullable = false)    // Bard 대답
     private String responseText;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private Users users;
