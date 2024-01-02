@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class TimeTraceAop {
 
-    @Around("execution(* com.personal.doctor.CapstoneDesign.hospital.controller..*(..))")
+    @Around("execution(* com.personal.doctor.CapstoneDesign.hospital.controller..*(..))" +
+            " || execution(* com.personal.doctor.CapstoneDesign.chat.controller..*(..))" +
+            " || execution(* com.personal.doctor.CapstoneDesign.community.controller..*(..))" +
+            " || execution(* com.personal.doctor.CapstoneDesign.user.controller..*(..))" +
+            " || execution(* com.personal.doctor.CapstoneDesign.userDetail.controller..*(..))")
     public Object execute(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
