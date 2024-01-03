@@ -43,7 +43,7 @@ public class ChatService {
     public List<ChatRequestDto> userChats(Long userId) {
         return chatRepository.findChatByUsersId(userId).stream()
                 .map(ChatRequestDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional

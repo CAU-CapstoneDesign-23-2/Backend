@@ -32,7 +32,7 @@ public class HospitalService {
 
         return hospitalRepository.findHospitalsByName(users.getLocation().trim(), type).stream()
                 .map(HospitalListResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 사용자 거주지의 병원 List로 반환
@@ -43,7 +43,7 @@ public class HospitalService {
 
         return hospitalRepository.findHospitalByAddress(users.getLocation()).stream()
                 .map(HospitalListResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 사용자 거주지 병원 중 메인 화면에 노출할 한 개의 병원 노출

@@ -82,7 +82,7 @@ public class PostService {
     public List<PostListResponseDto> findById(Long userId) {
         return postsRepository.findAllUserPosts(userId).stream()
                 .map(PostListResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 모든 Post 반환
@@ -90,7 +90,7 @@ public class PostService {
     public List<PostListResponseDto> findAllDesc() {
         return postsRepository.findAllDesc().stream()
                 .map(PostListResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 카테고리별 Post 반환
@@ -98,7 +98,7 @@ public class PostService {
     public List<PostListResponseDto> findByCategory(String category) {
         return postsRepository.findPostsByCategory(category).stream()
                 .map(PostListResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     // 카테고리에서의 검색
@@ -106,7 +106,7 @@ public class PostService {
     public List<PostListResponseDto> findCategoryByKeyword(String category, String keyword) {
         return postsRepository.findPostsCategoryByKeyword(category, keyword).stream()
                 .map(PostListResponseDto::new)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional
