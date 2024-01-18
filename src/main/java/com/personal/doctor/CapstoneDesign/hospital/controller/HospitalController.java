@@ -27,7 +27,7 @@ public class HospitalController {
     // 사용자가 입력한 주소에 있는 병원들 반환
     @Cacheable(value = "userHospitals", key = "#userID + '_' + 'Hospitals'")
 //    @GetMapping(value = "/hospital/address/{userID}", produces = "application/json;charset=UTF-8")
-    @PostMapping("/hospital/address/{userID")
+    @PostMapping("/hospital/address/{userID}")
     public List<HospitalListResponseDto> withAddress(@PathVariable Long userID) {
         return hospitalService.findHospitalAddress(userID);
     }
@@ -35,7 +35,7 @@ public class HospitalController {
     // 메인 화면에 노출할 사용자 거주지 주변 병원 한 개 반환
     @Cacheable(value = "userHospital", key = "#userID + '_' + 'Hospital'")
 //    @GetMapping(value = "/hospital/main/{userID}", produces = "application/json;charset=UTF-8")
-    @PostMapping("/hospital/main/{userID")
+    @PostMapping("/hospital/main/{userID}")
     public HospitalListResponseDto onMain(@PathVariable Long userID) {
         HospitalListResponseDto result = hospitalService.findOneHospitalByAddress(userID);
         System.out.println("Cache Not Used: " + result);
